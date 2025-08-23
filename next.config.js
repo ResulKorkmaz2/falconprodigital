@@ -1,43 +1,35 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
-  trailingSlash: true,
   images: {
-    unoptimized: true
-  },
-  experimental: {
-    appDir: true,
+    domains: ['images.unsplash.com', 'cdn.pixabay.com'],
   },
   i18n: {
-    locales: ['en', 'ar-sa'],
-    defaultLocale: 'en',
+    locales: ['ar'],
+    defaultLocale: 'ar',
     localeDetection: false,
   },
-  images: {
-    formats: ['image/avif', 'image/webp'],
-    domains: ['localhost'],
-  },
+  // Optimize for Gulf region
   async headers() {
     return [
       {
         source: '/(.*)',
         headers: [
           {
-            key: 'X-Frame-Options',
-            value: 'DENY',
-          },
-          {
             key: 'X-Content-Type-Options',
             value: 'nosniff',
           },
           {
-            key: 'Referrer-Policy',
-            value: 'strict-origin-when-cross-origin',
+            key: 'X-Frame-Options',
+            value: 'DENY',
+          },
+          {
+            key: 'X-XSS-Protection',
+            value: '1; mode=block',
           },
         ],
       },
-    ]
+    ];
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

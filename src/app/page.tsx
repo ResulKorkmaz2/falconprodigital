@@ -1,21 +1,36 @@
-import Nav from '@/components/Nav'
-import Hero from '@/components/Hero'
-import Services from '@/sections/Services'
-import About from '@/sections/About'
-import Contact from '@/sections/Contact'
-import Footer from '@/components/Footer'
-import WhatsAppFloat from '@/components/WhatsAppFloat'
+import Navigation from '@/components/layout/Navigation'
+import Hero from '@/components/sections/Hero'
+import Services from '@/components/sections/Services'
+import About from '@/components/sections/About'
+import Contact from '@/components/sections/Contact'
+import Footer from '@/components/layout/Footer'
+import WhatsAppFloat from '@/components/layout/WhatsAppFloat'
 
 export default function Home() {
   return (
     <main className="min-h-screen">
-      <Nav />
+      {/* Navigation */}
+      <Navigation />
+      
+      {/* Hero Section */}
       <Hero />
+      
+      {/* Services Section */}
       <Services />
+      
+      {/* About Section */}
       <About />
+      
+      {/* Contact Section */}
       <Contact />
+      
+      {/* Footer */}
       <Footer />
+      
+      {/* WhatsApp Floating Button */}
       <WhatsAppFloat />
     </main>
   )
 }
+
+

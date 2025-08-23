@@ -1,0 +1,2638 @@
+import type { Metadata } from 'next'
+import { notFound } from 'next/navigation'
+import { SERVICES, WHATSAPP_CONFIG } from '@/lib/constants'
+import { formatPrice } from '@/lib/utils'
+import Navigation from '@/components/layout/Navigation'
+import Footer from '@/components/layout/Footer'
+import WhatsAppFloat from '@/components/layout/WhatsAppFloat'
+import Container from '@/components/ui/Container'
+
+interface PageProps {
+  params: { slug: string }
+}
+
+// Static generation for all services
+export async function generateStaticParams() {
+  return SERVICES.map((service) => ({
+    slug: service.id,
+  }))
+}
+
+// Dynamic metadata generation
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const service = SERVICES.find(s => s.id === params.slug)
+  
+  if (!service) {
+    return { title: 'الخدمة غير موجودة - فالكون برو ديجيتال' }
+  }
+
+  // Enhanced SEO for Web Design & Development
+  if (service.id === 'web-design') {
+    const title = `Web Design & Development - تصميم وتطوير المواقع ${formatPrice(service.price)} | حديث ومتجاوب | فالكون برو ديجيتال`
+    const description = `احترف تصميم وتطوير المواقع بـ ${formatPrice(service.price)} دفعة واحدة. مواقع حديثة، متجاوبة، سريعة. زد مبيعاتك 500%، حسّن SEO، اجذب العملاء. تقنيات حديثة: React، Next.js، WordPress، Shopify. تجربة مستخدم مثالية: UX/UI، Mobile-First، Progressive Web Apps. خبرة دولية في السعودية، الإمارات، قطر، الكويت.`
+
+    return {
+      title,
+      description,
+      keywords: [
+        'تصميم المواقع',
+        'تطوير المواقع',
+        'Web Design',
+        'Website Development',
+        'Responsive Design',
+        'Mobile-First Design',
+        'Progressive Web Apps',
+        'PWA',
+        'React Development',
+        'Next.js Development',
+        'WordPress Development',
+        'Shopify Development',
+        'E-commerce Websites',
+        'Corporate Websites',
+        'Business Websites',
+        'Portfolio Websites',
+        'Landing Pages',
+        'Custom Web Development',
+        'Frontend Development',
+        'Backend Development',
+        'Full Stack Development',
+        'UI/UX Design',
+        'User Experience Design',
+        'User Interface Design',
+        'Web Performance Optimization',
+        'SEO Optimization',
+        'Search Engine Optimization',
+        'Website Speed Optimization',
+        'Core Web Vitals',
+        'Google PageSpeed',
+        'Mobile Optimization',
+        'Cross-browser Compatibility',
+        'Accessibility (A11Y)',
+        'WCAG Compliance',
+        'Content Management Systems',
+        'CMS Development',
+        'Database Integration',
+        'API Development',
+        'Third-party Integrations',
+        'Payment Gateway Integration',
+        'Social Media Integration',
+        'Google Analytics',
+        'Google Search Console',
+        'SSL Certificates',
+        'Website Security',
+        'تصميم متجاوب',
+        'مواقع الجوال',
+        'متاجر إلكترونية',
+        'مواقع الشركات',
+        'مواقع المحافظ',
+        'صفحات الهبوط',
+        'تحسين محركات البحث',
+        'تجربة المستخدم',
+        'واجهة المستخدم',
+        'Web Design السعودية',
+        'Web Design الإمارات',
+        'Web Design قطر',
+        'Web Design الكويت',
+        'تصميم المواقع الخليج',
+        'فالكون برو ديجيتال',
+        'Falcon Pro Digital',
+        'Aptiro LLC',
+        'شركة تصميم المواقع',
+        'وكالة تطوير الويب'
+      ],
+      openGraph: {
+        title,
+        description,
+        type: 'website',
+        locale: 'ar_SA',
+        siteName: 'فالكون برو ديجيتال',
+        url: `https://falconprodigital.com/services/web-design`,
+        images: service.image ? [{
+          url: service.image,
+          width: 1200,
+          height: 630,
+          alt: 'Web Design & Development - تصميم وتطوير المواقع - حديث ومتجاوب - فالكون برو ديجيتال'
+        }] : undefined,
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title,
+        description,
+        images: service.image ? [service.image] : undefined,
+      },
+      alternates: {
+        canonical: `https://falconprodigital.com/services/web-design`,
+      },
+      other: {
+        'product:price:amount': service.price.toString(),
+        'product:price:currency': 'USD',
+        'business:contact_data:region': 'الخليج العربي',
+        'article:publisher': 'فالكون برو ديجيتال',
+        'article:section': 'تصميم وتطوير المواقع',
+        'article:tag': 'Web Design, Development, Responsive, تصميم المواقع'
+      }
+    }
+  }
+
+  // Enhanced SEO for Social Media Management
+  if (service.id === 'social-media-management') {
+    const title = `Social Media Management - إدارة وسائل التواصل ${formatPrice(service.price)} | بناء العلامة التجارية | فالكون برو ديجيتال`
+    const description = `احترف إدارة وسائل التواصل الاجتماعي بـ ${formatPrice(service.price)} دفعة واحدة. إدارة احترافية، محتوى إبداعي، تفاعل مستمر. زد متابعيك 1000%، حسّن العلامة التجارية، اربح المزيد من العملاء. خدمة شاملة: إنستجرام، فيسبوك، تويتر، لينكد إن، سناب شات، تيك توك. خبرة دولية في السعودية، الإمارات، قطر، الكويت.`
+
+    return {
+      title,
+      description,
+      keywords: [
+        'إدارة وسائل التواصل الاجتماعي',
+        'Social Media Management',
+        'Content Creation',
+        'Social Media Marketing',
+        'Brand Building',
+        'Community Management',
+        'Instagram Management',
+        'Facebook Management',
+        'Twitter Management',
+        'LinkedIn Management',
+        'TikTok Management',
+        'Snapchat Management',
+        'YouTube Management',
+        'Social Media Strategy',
+        'Content Planning',
+        'Content Calendar',
+        'Social Media Advertising',
+        'Influencer Marketing',
+        'Social Media Analytics',
+        'Engagement Strategy',
+        'Follower Growth',
+        'Brand Awareness',
+        'Social Media ROI',
+        'Hashtag Strategy',
+        'Visual Content Creation',
+        'Video Content Creation',
+        'Photography Services',
+        'Graphic Design',
+        'Social Media Tools',
+        'Hootsuite',
+        'Buffer',
+        'Sprout Social',
+        'Later',
+        'Canva',
+        'Adobe Creative Suite',
+        'Social Media Reporting',
+        'Performance Analytics',
+        'Competitor Analysis',
+        'Trend Analysis',
+        'Crisis Management',
+        'Reputation Management',
+        'User-Generated Content',
+        'UGC Campaigns',
+        'Contest Management',
+        'Social Media Contests',
+        'Live Streaming',
+        'Stories Management',
+        'Reels Creation',
+        'IGTV Production',
+        'إنتاج المحتوى',
+        'التسويق عبر وسائل التواصل',
+        'بناء العلامة التجارية',
+        'إدارة المجتمع',
+        'نمو المتابعين',
+        'استراتيجية المحتوى',
+        'تحليل الأداء',
+        'إدارة الحسابات',
+        'التفاعل مع الجمهور',
+        'Social Media السعودية',
+        'Social Media الإمارات',
+        'Social Media قطر',
+        'Social Media الكويت',
+        'إدارة وسائل التواصل الخليج',
+        'فالكون برو ديجيتال',
+        'Falcon Pro Digital',
+        'Aptiro LLC',
+        'شركة إدارة وسائل التواصل',
+        'وكالة تسويق رقمي'
+      ],
+      openGraph: {
+        title,
+        description,
+        type: 'website',
+        locale: 'ar_SA',
+        siteName: 'فالكون برو ديجيتال',
+        url: `https://falconprodigital.com/services/social-media-management`,
+        images: service.image ? [{
+          url: service.image,
+          width: 1200,
+          height: 630,
+          alt: 'Social Media Management - إدارة وسائل التواصل - بناء العلامة التجارية - فالكون برو ديجيتال'
+        }] : undefined,
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title,
+        description,
+        images: service.image ? [service.image] : undefined,
+      },
+      alternates: {
+        canonical: `https://falconprodigital.com/services/social-media-management`,
+      },
+      other: {
+        'product:price:amount': service.price.toString(),
+        'product:price:currency': 'USD',
+        'business:contact_data:region': 'الخليج العربي',
+        'article:publisher': 'فالكون برو ديجيتال',
+        'article:section': 'إدارة وسائل التواصل الاجتماعي',
+        'article:tag': 'Social Media Management, Content Creation, Brand Building, إدارة وسائل التواصل'
+      }
+    }
+  }
+
+  // Enhanced SEO for Google Ads
+  if (service.id === 'google-ads') {
+    const title = `Google Ads - إعلانات جوجل ${formatPrice(service.price)} | زيادة العملاء 500% | فالكون برو ديجيتال`
+    const description = `احترف إعلانات جوجل بـ ${formatPrice(service.price)} دفعة واحدة. حملات بحث، شبكة إعلانية، YouTube. زد عملائك 500%، حسّن معدل التحويل، اربح عائد استثمار مضاعف. خدمة شاملة: كلمات مفتاحية، استهداف دقيق، تحسين العروض، تقارير مفصلة. خبرة دولية في السعودية، الإمارات، قطر، الكويت.`
+
+    return {
+      title,
+      description,
+      keywords: [
+        'إعلانات جوجل',
+        'Google Ads',
+        'Google AdWords',
+        'إعلانات البحث',
+        'Search Engine Marketing',
+        'PPC Pay Per Click',
+        'إعلانات الشبكة الإعلانية',
+        'Display Advertising',
+        'YouTube Ads',
+        'Google Shopping',
+        'remarketing',
+        'إعادة الاستهداف',
+        'الكلمات المفتاحية',
+        'Keywords Research',
+        'Quality Score',
+        'Ad Extensions',
+        'Landing Page Optimization',
+        'Conversion Tracking',
+        'Google Analytics',
+        'تحسين الحملات',
+        'Campaign Management',
+        'Bid Management',
+        'A/B Testing',
+        'ROI Return on Investment',
+        'CPC Cost Per Click',
+        'CTR Click Through Rate',
+        'إعلانات السعودية',
+        'إعلانات الإمارات',
+        'إعلانات قطر',
+        'إعلانات الكويت',
+        'Google Ads الخليج',
+        'PPC Management',
+        'فالكون برو ديجيتال',
+        'Falcon Pro Digital',
+        'Aptiro LLC',
+        'شركة إعلانات جوجل',
+        'وكالة Google Ads'
+      ],
+      openGraph: {
+        title,
+        description,
+        type: 'website',
+        locale: 'ar_SA',
+        siteName: 'فالكون برو ديجيتال',
+        url: `https://falconprodigital.com/services/google-ads`,
+        images: service.image ? [{
+          url: service.image,
+          width: 1200,
+          height: 630,
+          alt: 'Google Ads - إعلانات جوجل - زيادة العملاء 500% - فالكون برو ديجيتال'
+        }] : undefined,
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title,
+        description,
+        images: service.image ? [service.image] : undefined,
+      },
+      alternates: {
+        canonical: `https://falconprodigital.com/services/google-ads`,
+      },
+      other: {
+        'product:price:amount': service.price.toString(),
+        'product:price:currency': 'USD',
+        'business:contact_data:region': 'الخليج العربي',
+        'article:publisher': 'فالكون برو ديجيتال',
+        'article:section': 'إعلانات جوجل',
+        'article:tag': 'Google Ads, PPC, Search Marketing'
+      }
+    }
+  }
+
+  // Enhanced SEO for Social Media Ads
+  if (service.id === 'social-media-ads') {
+    const title = `Social Media Ads - إعلانات وسائل التواصل ${formatPrice(service.price)} | زيادة التفاعل 1000% | فالكون برو ديجيتال`
+    const description = `احترف إعلانات وسائل التواصل بـ ${formatPrice(service.price)} دفعة واحدة. Facebook، Instagram، TikTok، LinkedIn. زد تفاعلك 1000%، حسّن الوصول، اربح عملاء جدد. خدمة شاملة: تصميم إبداعي، استهداف دقيق، إدارة الحملات، تقارير مفصلة. خبرة دولية في السعودية، الإمارات، قطر، الكويت.`
+
+    return {
+      title,
+      description,
+      keywords: [
+        'إعلانات وسائل التواصل',
+        'Social Media Advertising',
+        'Facebook Ads',
+        'Instagram Ads',
+        'TikTok Advertising',
+        'LinkedIn Ads',
+        'Snapchat Ads',
+        'Twitter Ads',
+        'إعلانات فيسبوك',
+        'إعلانات إنستجرام',
+        'إعلانات تيك توك',
+        'إعلانات لينكدإن',
+        'الفيديو والريلز',
+        'Video Marketing',
+        'Reels Advertising',
+        'Stories Ads',
+        'Influencer Marketing',
+        'Social Media Management',
+        'Content Marketing',
+        'Brand Awareness',
+        'Lead Generation',
+        'Conversion Optimization',
+        'Audience Targeting',
+        'Retargeting Campaigns',
+        'Lookalike Audiences',
+        'Custom Audiences',
+        'A/B Testing',
+        'Creative Design',
+        'Social Media ROI',
+        'إعلانات السعودية',
+        'إعلانات الإمارات',
+        'إعلانات قطر',
+        'إعلانات الكويت',
+        'Social Media الخليج',
+        'فالكون برو ديجيتال',
+        'Falcon Pro Digital',
+        'Aptiro LLC',
+        'شركة إعلانات التواصل',
+        'وكالة Social Media'
+      ],
+      openGraph: {
+        title,
+        description,
+        type: 'website',
+        locale: 'ar_SA',
+        siteName: 'فالكون برو ديجيتال',
+        url: `https://falconprodigital.com/services/social-media-ads`,
+        images: service.image ? [{
+          url: service.image,
+          width: 1200,
+          height: 630,
+          alt: 'Social Media Ads - إعلانات وسائل التواصل - زيادة التفاعل 1000% - فالكون برو ديجيتال'
+        }] : undefined,
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title,
+        description,
+        images: service.image ? [service.image] : undefined,
+      },
+      alternates: {
+        canonical: `https://falconprodigital.com/services/social-media-ads`,
+      },
+      other: {
+        'product:price:amount': service.price.toString(),
+        'product:price:currency': 'USD',
+        'business:contact_data:region': 'الخليج العربي',
+        'article:publisher': 'فالكون برو ديجيتال',
+        'article:section': 'إعلانات وسائل التواصل',
+        'article:tag': 'Facebook Ads, Instagram, TikTok, وسائل التواصل'
+      }
+    }
+  }
+
+  // Enhanced SEO for AI Solutions
+  if (service.id === 'ai-solutions') {
+    const title = `AI Solutions - حلول الذكاء الاصطناعي ${formatPrice(service.price)} | أتمتة الأعمال | فالكون برو ديجيتال`
+    const description = `احترف حلول الذكاء الاصطناعي بـ ${formatPrice(service.price)} دفعة واحدة. روبوتات محادثة ذكية، أتمتة العمليات، تحليل البيانات، تعلم آلي. زد إنتاجيتك 300%، وفر التكاليف، حسّن خدمة العملاء. حلول مخصصة: ChatGPT، Machine Learning، NLP، Computer Vision. خبرة دولية في السعودية، الإمارات، قطر، الكويت.`
+
+    return {
+      title,
+      description,
+      keywords: [
+        'حلول الذكاء الاصطناعي',
+        'AI Solutions',
+        'Artificial Intelligence',
+        'روبوتات المحادثة',
+        'Chatbots',
+        'أتمتة العمليات',
+        'Business Automation',
+        'تعلم آلي',
+        'Machine Learning',
+        'معالجة اللغات الطبيعية',
+        'Natural Language Processing',
+        'NLP',
+        'رؤية الحاسوب',
+        'Computer Vision',
+        'تحليل البيانات',
+        'Data Analytics',
+        'التعلم العميق',
+        'Deep Learning',
+        'Neural Networks',
+        'GPT',
+        'ChatGPT',
+        'OpenAI',
+        'Google AI',
+        'Microsoft AI',
+        'Claude AI',
+        'Gemini AI',
+        'تطوير البرمجيات الذكية',
+        'Smart Software Development',
+        'Customer Service Automation',
+        'أتمتة خدمة العملاء',
+        'AI Integration',
+        'تكامل الذكاء الاصطناعي',
+        'Workflow Automation',
+        'أتمتة سير العمل',
+        'Predictive Analytics',
+        'التحليل التنبؤي',
+        'AI السعودية',
+        'AI الإمارات',
+        'AI قطر',
+        'AI الكويت',
+        'الذكاء الاصطناعي الخليج',
+        'فالكون برو ديجيتال',
+        'Falcon Pro Digital',
+        'Aptiro LLC',
+        'شركة ذكاء اصطناعي',
+        'وكالة AI'
+      ],
+      openGraph: {
+        title,
+        description,
+        type: 'website',
+        locale: 'ar_SA',
+        siteName: 'فالكون برو ديجيتال',
+        url: `https://falconprodigital.com/services/ai-solutions`,
+        images: service.image ? [{
+          url: service.image,
+          width: 1200,
+          height: 630,
+          alt: 'AI Solutions - حلول الذكاء الاصطناعي - أتمتة الأعمال - فالكون برو ديجيتال'
+        }] : undefined,
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title,
+        description,
+        images: service.image ? [service.image] : undefined,
+      },
+      alternates: {
+        canonical: `https://falconprodigital.com/services/ai-solutions`,
+      },
+      other: {
+        'product:price:amount': service.price.toString(),
+        'product:price:currency': 'USD',
+        'business:contact_data:region': 'الخليج العربي',
+        'article:publisher': 'فالكون برو ديجيتال',
+        'article:section': 'حلول الذكاء الاصطناعي',
+        'article:tag': 'AI, Machine Learning, Chatbots, ذكاء اصطناعي'
+      }
+    }
+  }
+
+  // Enhanced SEO for Desktop Software
+  if (service.id === 'desktop-software') {
+    const title = `Desktop Software - برامج سطح المكتب ${formatPrice(service.price)} | حلول مخصصة | فالكون برو ديجيتال`
+    const description = `احترف تطوير برامج سطح المكتب بـ ${formatPrice(service.price)} دفعة واحدة. حلول مخصصة، واجهات سهلة، أمان عالي. زد كفاءة عملك 400%، اربح الوقت، حسّن الإنتاجية. تقنيات حديثة: C#، Python، Java، Electron. دعم شامل: تدريب، صيانة، تحديثات. خبرة دولية في السعودية، الإمارات، قطر، الكويت.`
+
+    return {
+      title,
+      description,
+      keywords: [
+        'برامج سطح المكتب',
+        'Desktop Software',
+        'Custom Software Development',
+        'تطوير البرمجيات المخصصة',
+        'Desktop Applications',
+        'Windows Applications',
+        'Mac Applications',
+        'Cross-platform Software',
+        'برمجيات مخصصة',
+        'تطبيقات سطح المكتب',
+        'C# Development',
+        'Python Applications',
+        'Java Desktop Apps',
+        'Electron Applications',
+        '.NET Framework',
+        'WPF Applications',
+        'Qt Development',
+        'Tkinter',
+        'JavaFX',
+        'Software Architecture',
+        'Database Integration',
+        'User Interface Design',
+        'UX/UI for Desktop',
+        'Enterprise Software',
+        'Business Applications',
+        'Inventory Management Software',
+        'CRM Desktop Apps',
+        'ERP Systems',
+        'Accounting Software',
+        'Point of Sale Systems',
+        'POS Software',
+        'Healthcare Software',
+        'Education Software',
+        'Industrial Software',
+        'Manufacturing Software',
+        'Real Estate Software',
+        'Restaurant Management',
+        'Retail Software',
+        'برامج المحاسبة',
+        'برامج إدارة المخازن',
+        'برامج نقاط البيع',
+        'أنظمة إدارة المؤسسات',
+        'برامج المستشفيات',
+        'برامج التعليم',
+        'Desktop Software السعودية',
+        'Desktop Software الإمارات',
+        'Desktop Software قطر',
+        'Desktop Software الكويت',
+        'برامج الحاسوب الخليج',
+        'فالكون برو ديجيتال',
+        'Falcon Pro Digital',
+        'Aptiro LLC',
+        'شركة تطوير البرمجيات',
+        'وكالة برمجة'
+      ],
+      openGraph: {
+        title,
+        description,
+        type: 'website',
+        locale: 'ar_SA',
+        siteName: 'فالكون برو ديجيتال',
+        url: `https://falconprodigital.com/services/desktop-software`,
+        images: service.image ? [{
+          url: service.image,
+          width: 1200,
+          height: 630,
+          alt: 'Desktop Software - برامج سطح المكتب - حلول مخصصة - فالكون برو ديجيتال'
+        }] : undefined,
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title,
+        description,
+        images: service.image ? [service.image] : undefined,
+      },
+      alternates: {
+        canonical: `https://falconprodigital.com/services/desktop-software`,
+      },
+      other: {
+        'product:price:amount': service.price.toString(),
+        'product:price:currency': 'USD',
+        'business:contact_data:region': 'الخليج العربي',
+        'article:publisher': 'فالكون برو ديجيتال',
+        'article:section': 'برامج سطح المكتب',
+        'article:tag': 'Desktop Software, Custom Development, برمجيات مخصصة'
+      }
+    }
+  }
+
+  // Enhanced SEO for E-commerce Ads
+  if (service.id === 'ecommerce-ads') {
+    const title = `E-commerce Ads - إعلانات التجارة الإلكترونية ${formatPrice(service.price)} | فالكون برو ديجيتال`
+    const description = `احترف إعلانات التجارة الإلكترونية بـ ${formatPrice(service.price)} دفعة واحدة. Google Shopping، Facebook Ads، Instagram Shopping. زد مبيعاتك 400%، حسّن معدل التحويل، اربح عائد استثمار مضاعف. خدمة شاملة: استهداف دقيق، تتبع المبيعات، A/B Testing، تقارير مفصلة. خبرة دولية في السعودية، الإمارات، قطر، الكويت.`
+
+    return {
+      title,
+      description,
+      keywords: [
+        'إعلانات التجارة الإلكترونية',
+        'Google Shopping Ads',
+        'Facebook Commerce',
+        'Instagram Shopping',
+        'TikTok Shop Ads',
+        'Snapchat Ads',
+        'إعلانات المنتجات',
+        'زيادة المبيعات',
+        'معدل التحويل',
+        'عائد الاستثمار',
+        'Dynamic Product Ads',
+        'Retargeting Ads',
+        'Product Feed Optimization',
+        'E-commerce Marketing',
+        'تسويق إلكتروني',
+        'تجارة إلكترونية السعودية',
+        'تجارة إلكترونية الإمارات',
+        'تجارة إلكترونية قطر',
+        'تجارة إلكترونية الكويت',
+        'استهداف المشترين',
+        'تتبع المبيعات',
+        'A/B Testing',
+        'CRO Conversion Rate Optimization',
+        'Google Analytics 4',
+        'Shopify Marketing',
+        'WooCommerce Ads',
+        'فالكون برو ديجيتال',
+        'Falcon Pro Digital',
+        'Aptiro LLC',
+        'شركة إعلانات الخليج',
+        'وكالة تسويق رقمي'
+      ],
+      openGraph: {
+        title,
+        description,
+        type: 'website',
+        locale: 'ar_SA',
+        siteName: 'فالكون برو ديجيتال',
+        url: `https://falconprodigital.com/services/ecommerce-ads`,
+        images: service.image ? [{
+          url: service.image,
+          width: 1200,
+          height: 630,
+          alt: 'إعلانات التجارة الإلكترونية - زيادة المبيعات 400% - فالكون برو ديجيتال'
+        }] : undefined,
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title,
+        description,
+        images: service.image ? [service.image] : undefined,
+      },
+      alternates: {
+        canonical: `https://falconprodigital.com/services/ecommerce-ads`,
+      },
+      other: {
+        'product:price:amount': service.price.toString(),
+        'product:price:currency': 'USD',
+        'business:contact_data:region': 'الخليج العربي',
+        'article:publisher': 'فالكون برو ديجيتال',
+        'article:section': 'إعلانات التجارة الإلكترونية',
+        'article:tag': 'Google Shopping, Facebook Ads, تجارة إلكترونية'
+      }
+    }
+  }
+
+  // Default metadata for other services
+  return {
+    title: `${service.title} - ${formatPrice(service.price)} | فالكون برو ديجيتال`,
+    description: `${service.description} بسعر ${formatPrice(service.price)} دفعة واحدة. ${service.titleEnglish} احترافي من فالكون برو ديجيتال في منطقة الخليج.`,
+    keywords: [
+      service.title,
+      service.titleEnglish,
+      'فالكون برو ديجيتال',
+      'Falcon Pro Digital',
+      'تسويق رقمي',
+      'الخليج',
+      'السعودية',
+      'قطر',
+      'الكويت',
+      'الإمارات',
+      'Aptiro LLC'
+    ],
+    openGraph: {
+      title: `${service.title} - فالكون برو ديجيتال`,
+      description: service.description,
+      images: service.image ? [{ url: service.image, alt: service.title, width: 1200, height: 630 }] : undefined,
+      locale: 'ar_SA',
+      type: 'website',
+      siteName: 'فالكون برو ديجيتال'
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${service.title} - فالكون برو ديجيتال`,
+      description: service.description,
+      images: service.image ? [service.image] : undefined,
+    },
+    alternates: {
+      canonical: `https://falconprodigital.com/services/${params.slug}`,
+    },
+  }
+}
+
+// Helper function to get feature descriptions
+function getFeatureDescription(serviceId: string, feature: string): string {
+  const descriptions: { [key: string]: { [key: string]: string } } = {
+    'google-maps': {
+      'إنشاء وتحسين البروفايل': 'نقوم بإنشاء حساب Google My Business احترافي مع تحسين كامل للمعلومات',
+      'إدارة المراجعات': 'نتابع وندير مراجعات العملاء بشكل احترافي لبناء سمعة إيجابية',
+      'تحسين الصور والمعلومات': 'نرفع صور عالية الجودة ونحدث المعلومات بانتظام لجذب المزيد من العملاء'
+    },
+    'google-ads': {
+      'إعلانات البحث المتقدمة': 'حملات بحث مستهدفة تظهر إعلاناتك للعملاء الباحثين عن خدماتك',
+      'إعلانات الشبكة الإعلانية': 'إعلانات مرئية على ملايين المواقع لزيادة الوصول والوعي بالعلامة التجارية',
+      'حملات YouTube الاحترافية': 'إعلانات فيديو جذابة على أكبر منصة فيديو في العالم',
+      'استهداف جغرافي ودقيق': 'استهداف العملاء في المناطق الجغرافية المحددة التي تخدمها',
+      'تحسين الكلمات المفتاحية': 'بحث واختيار أفضل الكلمات المفتاحية لتحقيق أعلى عائد',
+      'تقارير مفصلة وتحليلات': 'تقارير شاملة لقياس الأداء وتحسين النتائج باستمرار',
+      'إدارة الميزانية والعروض': 'إدارة ذكية للميزانية والعروض لضمان أفضل عائد على الاستثمار',
+      'تتبع التحويلات والمبيعات': 'تتبع دقيق لكل عملية بيع وتحويل ناتجة عن الإعلانات'
+    },
+    'social-media-ads': {
+      'إعلانات فيسبوك وإنستجرام المتقدمة': 'حملات متقدمة على أكبر المنصات للوصول لأكبر عدد من العملاء المحتملين',
+      'إعلانات الفيديو والريلز الاحترافية': 'محتوى فيديو جذاب ومتحرك يزيد من التفاعل والمشاهدات',
+      'إعلانات القصص والهايلايتس': 'استغلال القصص لخلق تفاعل سريع وفوري مع جمهورك',
+      'إعادة الاستهداف الذكي': 'نستهدف من تفاعل مع محتواك سابقاً لتحويلهم إلى عملاء',
+      'تقسيم الجماهير المتقدم': 'تقسيم دقيق للجماهير حسب الاهتمامات والسلوك الشرائي',
+      'تصميم إعلانات جذابة': 'تصاميم احترافية تجذب الانتباه وتحفز على الشراء',
+      'إدارة الميزانيات والعروض': 'توزيع ذكي للميزانية لضمان أفضل عائد على الاستثمار',
+      'تقارير أداء تفصيلية': 'تقارير شاملة لقياس الأداء وتحسين النتائج باستمرار',
+      'إعلانات TikTok وSnapchat': 'إعلانات إبداعية على منصات الجيل الجديد لوصول أوسع',
+      'حملات LinkedIn B2B': 'حملات احترافية لاستهداف أصحاب الأعمال والمديرين التنفيذيين'
+    },
+    'ai-solutions': {
+      'روبوتات محادثة ذكية': 'روبوتات محادثة متطورة باستخدام ChatGPT وClaude لخدمة العملاء على مدار الساعة',
+      'أتمتة العمليات التجارية': 'أتمتة المهام المتكررة وتبسيط سير العمل لزيادة الكفاءة والإنتاجية',
+      'تحليل البيانات المتقدم': 'تحليل ذكي للبيانات باستخدام Machine Learning لاكتشاف الاتجاهات والأنماط',
+      'تكامل مع الأنظمة الحالية': 'ربط سلس مع أنظمتك الحالية دون تعطيل أو تغيير كبير في البنية',
+      'دعم متعدد اللغات': 'دعم كامل للغة العربية والإنجليزية مع فهم السياق الثقافي'
+    },
+    'desktop-software': {
+      'حلول برمجية مخصصة': 'تطوير برامج مصممة خصيصاً لمتطلباتك مع إمكانيات مرنة وقابلة للتوسع',
+      'واجهة استخدام سهلة': 'تصميم واجهات مستخدم بديهية وسهلة الاستخدام لضمان تجربة ممتازة',
+      'دعم فني متكامل': 'دعم فني شامل ومستمر مع خدمة عملاء متاحة لحل جميع المشاكل',
+      'تدريب شامل للمستخدمين': 'برامج تدريبية متكاملة لفريق العمل لضمان الاستخدام الأمثل',
+      'تحديثات دورية مجانية': 'تحديثات منتظمة ومجانية لضمان الأمان والأداء المثلى للبرنامج'
+    },
+    'web-design': {
+      'تصميم مخصص واحترافي': 'تصميمات فريدة ومخصصة تعكس هويتك التجارية وتتميز عن المنافسين بإبداع وجودة عالية',
+      'متجاوب مع جميع الأجهزة': 'مواقع تعمل بشكل مثالي على جميع الشاشات من الهواتف المحمولة إلى أجهزة الكمبيوتر المكتبية',
+      'سرعة تحميل عالية': 'تحسين الموقع لسرعة تحميل فائقة تحسن تجربة المستخدم وترفع ترتيبك في جوجل',
+      'محسن لمحركات البحث': 'تطبيق أفضل ممارسات SEO لضمان ظهور موقعك في نتائج البحث الأولى وجذب المزيد من الزوار',
+      'لوحة تحكم سهلة': 'نظام إدارة محتوى سهل الاستخدام يمكنك من تحديث موقعك بسهولة دون الحاجة لخبرة تقنية'
+    },
+    'social-media-management': {
+      'إنشاء وإدارة المحتوى': 'إنتاج محتوى إبداعي وجذاب يناسب كل منصة ويتفاعل مع جمهورك المستهدف بشكل فعال',
+      'جدولة ونشر المنشورات': 'تخطيط وجدولة المحتوى بشكل استراتيجي لضمان الوصول الأمثل والتفاعل المستمر مع متابعيك',
+      'التفاعل مع الجمهور': 'رد سريع ومهني على التعليقات والرسائل لبناء علاقات قوية ومجتمع متفاعل حول علامتك التجارية',
+      'تحليل الأداء والتقارير': 'مراقبة مستمرة للنتائج وتقارير مفصلة تساعدك على فهم جمهورك وتحسين الاستراتيجية',
+      'بناء استراتيجية المحتوى': 'وضع خطة محتوى شاملة تتماشى مع أهدافك التجارية وتعزز من نمو علامتك التجارية'
+    }
+  }
+  
+  return descriptions[serviceId]?.[feature] || 'خدمة احترافية متكاملة تضمن تحقيق أفضل النتائج لعملك'
+}
+
+export default function ServicePage({ params }: PageProps) {
+  const service = SERVICES.find(s => s.id === params.slug)
+  
+  if (!service) {
+    notFound()
+  }
+
+  // Generate WhatsApp URLs
+  const whatsappContactUrl = `https://wa.me/${WHATSAPP_CONFIG.number.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(
+    `السلام عليكم! أريد الاستفسار عن خدمة ${service.title} بسعر ${formatPrice(service.price)} (دفعة واحدة)`
+  )}`
+  
+  const whatsappQuoteUrl = `https://wa.me/${WHATSAPP_CONFIG.number.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(
+    `السلام عليكم! أريد عرض سعر مفصل لخدمة ${service.title}`
+  )}`
+
+  return (
+    <div className="min-h-screen bg-white">
+      <Navigation />
+      
+      {/* Hero Section */}
+      <section className="relative py-20 bg-gradient-to-br from-primary-900 via-primary-800 to-primary-700 overflow-hidden">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent rotate-12"></div>
+        </div>
+        
+        <Container className="relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Content */}
+            <div className="text-white">
+              {/* Service Badge */}
+              <div className="inline-flex items-center bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 mb-6">
+                <span className="text-2xl ml-2">{service.icon}</span>
+                <span className="text-sm font-medium">خدمة احترافية</span>
+              </div>
+
+              {/* Title */}
+              <h1 className="text-4xl lg:text-5xl font-black mb-4 leading-tight">
+                {service.titleEnglish} - {service.title}
+              </h1>
+              
+              <p className="text-xl text-white/90 mb-6">
+                {service.titleEnglish}
+              </p>
+
+              {/* Description */}
+              <p className="text-lg text-white/80 mb-8 leading-relaxed">
+                {service.description}
+              </p>
+
+              {/* Price */}
+              <div className="flex items-center gap-6 mb-8">
+                <div className="bg-white/10 backdrop-blur-sm rounded-2xl px-6 py-4">
+                  <div className="text-3xl font-black text-accent-400">
+                    {formatPrice(service.price)}
+                  </div>
+                  <div className="text-sm text-white/70">
+                    دفعة واحدة
+                  </div>
+                </div>
+                
+                {service.popular && (
+                  <div className="bg-accent-500 text-white px-4 py-2 rounded-full text-sm font-bold">
+                    ⭐ الأكثر طلباً
+                  </div>
+                )}
+              </div>
+
+              {/* CTA Buttons */}
+              <div className="flex flex-col sm:flex-row gap-4">
+                <a
+                  href={whatsappContactUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center px-8 py-4 bg-green-600 text-white hover:bg-green-700 shadow-xl rounded-xl font-bold text-lg transition-all duration-300"
+                >
+                  <svg className="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+                  </svg>
+                  ابدأ الآن
+                </a>
+                
+                <a
+                  href={whatsappQuoteUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center px-8 py-4 border-2 border-white text-white hover:bg-white hover:text-primary-600 rounded-xl font-bold text-lg transition-all duration-300"
+                >
+                  احصل على عرض سعر
+                </a>
+              </div>
+            </div>
+
+            {/* Image */}
+            <div className="relative">
+              {service.image && (
+                <div className="relative rounded-3xl overflow-hidden shadow-2xl">
+                  <img 
+                    src={service.image} 
+                    alt={service.title}
+                    className="w-full h-96 object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                  
+                  {/* Floating Icon */}
+                  <div className="absolute bottom-6 right-6">
+                    <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-xl">
+                      <span className="text-3xl">{service.icon}</span>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* Features Section */}
+      <section className="py-20 bg-gray-50">
+        <Container>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-black text-gray-900 mb-4">
+              ما تحصل عليه
+            </h2>
+            <p className="text-xl text-gray-600">
+              خدمات شاملة ومتكاملة لضمان نجاح مشروعك
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {service.features.map((feature, index) => (
+              <div 
+                key={index}
+                className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300"
+              >
+                <div className="flex items-start">
+                  <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mr-4">
+                    <svg className="w-6 h-6 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-gray-900 mb-2">
+                      {feature}
+                    </h3>
+                    <p className="text-gray-600">
+                      {getFeatureDescription(service.id, feature)}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      {/* Service-Specific Content */}
+      {service.id === 'google-maps' && (
+        <section className="py-20">
+          <Container>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              <div>
+                <h2 className="text-3xl font-black text-gray-900 mb-6">
+                  لماذا تحتاج خرائط جوجل؟
+                </h2>
+                <div className="space-y-6">
+                  <div className="flex items-start">
+                    <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mr-4 mt-1">
+                      <span className="text-blue-600 font-bold">1</span>
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold text-gray-900 mb-2">زيادة الظهور المحلي</h3>
+                      <p className="text-gray-600">يظهر عملك في نتائج البحث المحلية عندما يبحث العملاء عن خدماتك في منطقتك</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start">
+                    <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mr-4 mt-1">
+                      <span className="text-green-600 font-bold">2</span>
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold text-gray-900 mb-2">بناء الثقة والمصداقية</h3>
+                      <p className="text-gray-600">المراجعات والتقييمات الإيجابية تبني ثقة العملاء الجدد في خدماتك</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start">
+                    <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0 mr-4 mt-1">
+                      <span className="text-purple-600 font-bold">3</span>
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold text-gray-900 mb-2">سهولة العثور عليك</h3>
+                      <p className="text-gray-600">العملاء يمكنهم العثور على موقعك وساعات العمل ومعلومات التواصل بسهولة</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="bg-gradient-to-br from-blue-50 to-green-50 rounded-3xl p-8">
+                <h3 className="text-2xl font-black text-gray-900 mb-6 text-center">
+                  ماذا نقدم لك؟
+                </h3>
+                <div className="space-y-4">
+                  {[
+                    'إنشاء حساب Google My Business احترافي',
+                    'تحسين معلومات الشركة والموقع',
+                    'رفع صور عالية الجودة للمكان والخدمات',
+                    'إعداد ساعات العمل ومعلومات التواصل',
+                    'تفعيل المراجعات وإدارتها بشكل احترافي',
+                    'ربط الحساب بموقعك الإلكتروني',
+                    'تقارير شهرية عن الأداء والإحصائيات'
+                  ].map((item, index) => (
+                    <div key={index} className="flex items-center">
+                      <svg className="w-5 h-5 text-green-600 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                      <span className="text-gray-700">{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </Container>
+        </section>
+      )}
+
+      {/* E-commerce Ads Rich Content */}
+      {service.id === 'ecommerce-ads' && (
+        <>
+          <section className="py-20 bg-gradient-to-br from-orange-50 to-red-50">
+            <Container>
+              <div className="text-center mb-16">
+                <h2 className="text-4xl font-black text-gray-900 mb-6">
+                  لماذا تحتاج إعلانات التجارة الإلكترونية؟
+                </h2>
+                <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+                  في عالم التجارة الإلكترونية المتنافس، الإعلانات المتخصصة هي مفتاح النجاح لزيادة المبيعات والوصول للعملاء المناسبين في الوقت المناسب
+                </p>
+              </div>
+              
+              <div className="grid lg:grid-cols-3 gap-8 mb-16">
+                <div className="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300">
+                  <div className="w-16 h-16 bg-gradient-to-r from-orange-500 to-red-500 rounded-full flex items-center justify-center mb-6 mx-auto">
+                    <span className="text-2xl text-white">📈</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">زيادة المبيعات</h3>
+                  <p className="text-gray-600 text-center">
+                    إعلانات مستهدفة تصل إلى العملاء المهتمين بمنتجاتك، مما يؤدي إلى زيادة معدل التحويل بنسبة تصل إلى 300%
+                  </p>
+                </div>
+                
+                <div className="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300">
+                  <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center mb-6 mx-auto">
+                    <span className="text-2xl text-white">🎯</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">استهداف دقيق</h3>
+                  <p className="text-gray-600 text-center">
+                    نستهدف العملاء بناءً على اهتماماتهم، سلوكهم الشرائي، والديموغرافيا الخاصة بهم لضمان أفضل النتائج
+                  </p>
+                </div>
+                
+                <div className="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300">
+                  <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-teal-500 rounded-full flex items-center justify-center mb-6 mx-auto">
+                    <span className="text-2xl text-white">💰</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">عائد استثمار مرتفع</h3>
+                  <p className="text-gray-600 text-center">
+                    تحليل مستمر للحملات وتحسين الأداء لضمان الحصول على أفضل عائد استثمار من كل ريال تنفقه
+                  </p>
+                </div>
+              </div>
+            </Container>
+          </section>
+
+          <section className="py-20 bg-white">
+            <Container>
+              <div className="grid lg:grid-cols-2 gap-16 items-center">
+                <div>
+                  <h2 className="text-4xl font-black text-gray-900 mb-8">
+                    منصات الإعلان التي نغطيها
+                  </h2>
+                  <div className="space-y-6">
+                    <div className="flex items-center">
+                      <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mr-4">
+                        <span className="text-red-600 font-bold">G</span>
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-bold text-gray-900">Google Ads & Shopping</h3>
+                        <p className="text-gray-600">إعلانات البحث والتسوق على أكبر محرك بحث</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-center">
+                      <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                        <span className="text-blue-600 font-bold">F</span>
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-bold text-gray-900">Facebook & Instagram</h3>
+                        <p className="text-gray-600">إعلانات المنتجات والمتاجر على منصات Meta</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-center">
+                      <div className="w-12 h-12 bg-black text-white rounded-full flex items-center justify-center mr-4">
+                        <span className="font-bold">T</span>
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-bold text-gray-900">TikTok للأعمال</h3>
+                        <p className="text-gray-600">الوصول للجيل الجديد من المتسوقين</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-center">
+                      <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mr-4">
+                        <span className="text-yellow-600 font-bold">S</span>
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-bold text-gray-900">Snapchat Ads</h3>
+                        <p className="text-gray-600">استهداف الشباب في منطقة الخليج</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-3xl p-8">
+                  <h3 className="text-2xl font-black text-gray-900 mb-6 text-center">
+                    ما تشمله خدماتنا
+                  </h3>
+                  <div className="space-y-4">
+                    {[
+                      'إعداد حملات Google Shopping المتقدمة',
+                      'تحسين فيد المنتجات (Product Feed)',
+                      'إعلانات إعادة الاستهداف (Retargeting)',
+                      'حملات Dynamic Product Ads',
+                      'تتبع التحويلات والمبيعات',
+                      'A/B testing للإعلانات والصفحات',
+                      'تقارير شهرية مفصلة مع التوصيات',
+                      'تحسين معدل التحويل (CRO)',
+                      'إعداد Google Analytics 4',
+                      'ربط مع منصات التجارة الإلكترونية'
+                    ].map((item, index) => (
+                      <div key={index} className="flex items-start">
+                        <svg className="w-5 h-5 text-green-600 mr-3 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        <span className="text-gray-700 leading-relaxed">{item}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </Container>
+          </section>
+
+          <section className="py-20 bg-gray-900 text-white">
+            <Container>
+              <div className="text-center mb-16">
+                <h2 className="text-4xl font-black mb-6">
+                  قصص نجاح عملائنا
+                </h2>
+                <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+                  نفخر بالنتائج المبهرة التي حققناها لعملائنا في مجال التجارة الإلكترونية
+                </p>
+              </div>
+              
+              <div className="grid md:grid-cols-3 gap-8">
+                <div className="bg-gray-800 rounded-3xl p-8 text-center">
+                  <div className="text-4xl font-black text-orange-500 mb-2">+400%</div>
+                  <h3 className="text-xl font-bold mb-2">زيادة المبيعات</h3>
+                  <p className="text-gray-400">متجر أزياء في الرياض</p>
+                </div>
+                
+                <div className="bg-gray-800 rounded-3xl p-8 text-center">
+                  <div className="text-4xl font-black text-green-500 mb-2">2.8x</div>
+                  <h3 className="text-xl font-bold mb-2">عائد الاستثمار</h3>
+                  <p className="text-gray-400">متجر إلكترونيات في دبي</p>
+                </div>
+                
+                <div className="bg-gray-800 rounded-3xl p-8 text-center">
+                  <div className="text-4xl font-black text-blue-500 mb-2">60%</div>
+                  <h3 className="text-xl font-bold mb-2">تحسن معدل التحويل</h3>
+                  <p className="text-gray-400">متجر مستحضرات تجميل في الكويت</p>
+                </div>
+              </div>
+            </Container>
+          </section>
+
+          <section className="py-20 bg-gradient-to-r from-orange-500 to-red-500 text-white">
+            <Container>
+              <div className="text-center">
+                <h2 className="text-4xl font-black mb-6">
+                  مستعد لزيادة مبيعاتك؟
+                </h2>
+                <p className="text-xl mb-8 max-w-3xl mx-auto leading-relaxed">
+                  ابدأ حملتك الإعلانية الآن واحصل على استشارة مجانية لتحليل متجرك وفرص النمو المتاحة
+                </p>
+                <div className="bg-white rounded-2xl p-8 max-w-2xl mx-auto">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4">احصل على تحليل مجاني</h3>
+                  <div className="grid md:grid-cols-2 gap-4 text-gray-700 text-right">
+                    <div className="flex items-center">
+                      <span className="text-green-600 mr-2">✓</span>
+                      تحليل أداء متجرك الحالي
+                    </div>
+                    <div className="flex items-center">
+                      <span className="text-green-600 mr-2">✓</span>
+                      دراسة المنافسين
+                    </div>
+                    <div className="flex items-center">
+                      <span className="text-green-600 mr-2">✓</span>
+                      اقتراح استراتيجية مخصصة
+                    </div>
+                    <div className="flex items-center">
+                      <span className="text-green-600 mr-2">✓</span>
+                      توقعات النتائج
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Container>
+          </section>
+        </>
+      )}
+
+      {/* Google Ads Rich Content */}
+      {service.id === 'google-ads' && (
+        <>
+          <section className="py-20 bg-gradient-to-br from-blue-50 to-indigo-50">
+            <Container>
+              <div className="text-center mb-16">
+                <h2 className="text-4xl font-black text-gray-900 mb-6">
+                  لماذا تحتاج إعلانات جوجل؟
+                </h2>
+                <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+                  مع أكثر من 8.5 مليار عملية بحث يومياً على جوجل، إعلانات جوجل هي أسرع طريقة للوصول للعملاء المهتمين بخدماتك
+                </p>
+              </div>
+              
+              <div className="grid lg:grid-cols-4 gap-8 mb-16">
+                <div className="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300">
+                  <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full flex items-center justify-center mb-6 mx-auto">
+                    <span className="text-2xl text-white">🎯</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">نتائج فورية</h3>
+                  <p className="text-gray-600 text-center">
+                    احصل على عملاء جدد من اليوم الأول لبدء حملاتك الإعلانية
+                  </p>
+                </div>
+                
+                <div className="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300">
+                  <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-teal-500 rounded-full flex items-center justify-center mb-6 mx-auto">
+                    <span className="text-2xl text-white">📊</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">تحكم كامل</h3>
+                  <p className="text-gray-600 text-center">
+                    تحكم في ميزانيتك، مواعيد الإعلانات، والجمهور المستهدف بدقة
+                  </p>
+                </div>
+                
+                <div className="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300">
+                  <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mb-6 mx-auto">
+                    <span className="text-2xl text-white">💰</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">عائد مضمون</h3>
+                  <p className="text-gray-600 text-center">
+                    ادفع فقط عند النقر على إعلانك، مما يضمن أفضل استخدام لميزانيتك
+                  </p>
+                </div>
+                
+                <div className="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300">
+                  <div className="w-16 h-16 bg-gradient-to-r from-orange-500 to-red-500 rounded-full flex items-center justify-center mb-6 mx-auto">
+                    <span className="text-2xl text-white">📈</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">قابلية القياس</h3>
+                  <p className="text-gray-600 text-center">
+                    تتبع كل نقرة، اتصال، ومبيعة بتقارير مفصلة ودقيقة
+                  </p>
+                </div>
+              </div>
+            </Container>
+          </section>
+
+          <section className="py-20 bg-white">
+            <Container>
+              <div className="grid lg:grid-cols-2 gap-16 items-center">
+                <div>
+                  <h2 className="text-4xl font-black text-gray-900 mb-8">
+                    أنواع حملات جوجل التي ندير
+                  </h2>
+                  <div className="space-y-6">
+                    <div className="flex items-start">
+                      <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                        <span className="text-blue-600 font-bold">🔍</span>
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-bold text-gray-900">حملات البحث</h3>
+                        <p className="text-gray-600">إعلانات تظهر في نتائج البحث عند البحث عن كلماتك المفتاحية</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start">
+                      <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                        <span className="text-green-600 font-bold">🌐</span>
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-bold text-gray-900">الشبكة الإعلانية</h3>
+                        <p className="text-gray-600">إعلانات مرئية على ملايين المواقع والتطبيقات المشتركة مع جوجل</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start">
+                      <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                        <span className="text-red-600 font-bold">▶️</span>
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-bold text-gray-900">إعلانات YouTube</h3>
+                        <p className="text-gray-600">فيديوهات إعلانية على أكبر منصة فيديو في العالم</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start">
+                      <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                        <span className="text-yellow-600 font-bold">🛍️</span>
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-bold text-gray-900">Google Shopping</h3>
+                        <p className="text-gray-600">إعلانات المنتجات مع الصور والأسعار في نتائج البحث</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start">
+                      <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                        <span className="text-purple-600 font-bold">📱</span>
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-bold text-gray-900">حملات التطبيقات</h3>
+                        <p className="text-gray-600">الترويج لتطبيقك على جوجل بلاي وجميع منصات جوجل</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-3xl p-8">
+                  <h3 className="text-2xl font-black text-gray-900 mb-6 text-center">
+                    خدماتنا الشاملة
+                  </h3>
+                  <div className="space-y-4">
+                    {[
+                      'بحث وتحليل الكلمات المفتاحية',
+                      'إنشاء وتصميم الإعلانات الجذابة',
+                      'إعداد صفحات الهبوط المحسنة',
+                      'إدارة العروض والميزانيات',
+                      'تحسين Quality Score',
+                      'إعداد تتبع التحويلات',
+                      'A/B testing للإعلانات',
+                      'تقارير أداء شهرية مفصلة',
+                      'تحسين مستمر للحملات',
+                      'استشارات استراتيجية مجانية'
+                    ].map((item, index) => (
+                      <div key={index} className="flex items-start">
+                        <svg className="w-5 h-5 text-green-600 mr-3 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        <span className="text-gray-700 leading-relaxed">{item}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </Container>
+          </section>
+
+          <section className="py-20 bg-gray-900 text-white">
+            <Container>
+              <div className="text-center mb-16">
+                <h2 className="text-4xl font-black mb-6">
+                  نتائج مبهرة حققناها لعملائنا
+                </h2>
+                <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+                  نفخر بالنجاحات التي حققناها لعملائنا في حملات إعلانات جوجل
+                </p>
+              </div>
+              
+              <div className="grid md:grid-cols-3 gap-8">
+                <div className="bg-gray-800 rounded-3xl p-8 text-center">
+                  <div className="text-4xl font-black text-blue-500 mb-2">+500%</div>
+                  <h3 className="text-xl font-bold mb-2">زيادة العملاء</h3>
+                  <p className="text-gray-400">شركة خدمات في الرياض</p>
+                </div>
+                
+                <div className="bg-gray-800 rounded-3xl p-8 text-center">
+                  <div className="text-4xl font-black text-green-500 mb-2">3.2x</div>
+                  <h3 className="text-xl font-bold mb-2">عائد الاستثمار</h3>
+                  <p className="text-gray-400">متجر إلكترونيات في دبي</p>
+                </div>
+                
+                <div className="bg-gray-800 rounded-3xl p-8 text-center">
+                  <div className="text-4xl font-black text-yellow-500 mb-2">-65%</div>
+                  <h3 className="text-xl font-bold mb-2">تقليل تكلفة النقرة</h3>
+                  <p className="text-gray-400">عيادة طبية في الكويت</p>
+                </div>
+              </div>
+            </Container>
+          </section>
+
+          <section className="py-20 bg-gradient-to-r from-blue-500 to-indigo-500 text-white">
+            <Container>
+              <div className="text-center">
+                <h2 className="text-4xl font-black mb-6">
+                  احصل على تحليل مجاني لحملاتك الحالية
+                </h2>
+                <p className="text-xl mb-8 max-w-3xl mx-auto leading-relaxed">
+                  سنحلل حساب Google Ads الخاص بك مجاناً ونقدم لك تقريراً مفصلاً عن فرص التحسين المتاحة
+                </p>
+                <div className="bg-white rounded-2xl p-8 max-w-2xl mx-auto">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4">تحليل مجاني يتضمن</h3>
+                  <div className="grid md:grid-cols-2 gap-4 text-gray-700 text-right">
+                    <div className="flex items-center">
+                      <span className="text-green-600 mr-2">✓</span>
+                      تحليل أداء الكلمات المفتاحية
+                    </div>
+                    <div className="flex items-center">
+                      <span className="text-green-600 mr-2">✓</span>
+                      مراجعة بنية الحساب
+                    </div>
+                    <div className="flex items-center">
+                      <span className="text-green-600 mr-2">✓</span>
+                      تحليل المنافسين
+                    </div>
+                    <div className="flex items-center">
+                      <span className="text-green-600 mr-2">✓</span>
+                      اقتراحات تحسين الميزانية
+                    </div>
+                    <div className="flex items-center">
+                      <span className="text-green-600 mr-2">✓</span>
+                      توقعات نتائج التحسين
+                    </div>
+                    <div className="flex items-center">
+                      <span className="text-green-600 mr-2">✓</span>
+                      خطة عمل مفصلة
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Container>
+          </section>
+        </>
+      )}
+
+      {/* Social Media Ads Rich Content */}
+      {service.id === 'social-media-ads' && (
+        <>
+          <section className="py-20 bg-gradient-to-br from-pink-50 to-purple-50">
+            <Container>
+              <div className="text-center mb-16">
+                <h2 className="text-4xl font-black text-gray-900 mb-6">
+                  لماذا إعلانات وسائل التواصل ضرورية لنجاح عملك؟
+                </h2>
+                <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+                  مع أكثر من 4.8 مليار مستخدم لوسائل التواصل الاجتماعي، هذه أقوى طريقة للوصول لعملائك المثاليين
+                </p>
+              </div>
+              
+              <div className="grid lg:grid-cols-4 gap-8 mb-16">
+                <div className="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300">
+                  <div className="w-16 h-16 bg-gradient-to-r from-pink-500 to-rose-500 rounded-full flex items-center justify-center mb-6 mx-auto">
+                    <span className="text-2xl text-white">💡</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">وعي بالعلامة التجارية</h3>
+                  <p className="text-gray-600 text-center">
+                    اجعل علامتك التجارية معروفة لملايين المستخدمين المناسبين
+                  </p>
+                </div>
+                
+                <div className="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300">
+                  <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full flex items-center justify-center mb-6 mx-auto">
+                    <span className="text-2xl text-white">👥</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">تفاعل حقيقي</h3>
+                  <p className="text-gray-600 text-center">
+                    بناء علاقات قوية مع جمهورك وزيادة ولائهم للعلامة التجارية
+                  </p>
+                </div>
+                
+                <div className="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300">
+                  <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center mb-6 mx-auto">
+                    <span className="text-2xl text-white">🎯</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">استهداف دقيق</h3>
+                  <p className="text-gray-600 text-center">
+                    وصل للعملاء المناسبين بناءً على اهتماماتهم وسلوكهم
+                  </p>
+                </div>
+                
+                <div className="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300">
+                  <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-violet-500 rounded-full flex items-center justify-center mb-6 mx-auto">
+                    <span className="text-2xl text-white">📈</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">مبيعات أكثر</h3>
+                  <p className="text-gray-600 text-center">
+                    تحويل المتابعين إلى عملاء حقيقيين يشترون منتجاتك
+                  </p>
+                </div>
+              </div>
+            </Container>
+          </section>
+
+          <section className="py-20 bg-white">
+            <Container>
+              <div className="grid lg:grid-cols-2 gap-16 items-center">
+                <div>
+                  <h2 className="text-4xl font-black text-gray-900 mb-8">
+                    المنصات التي نديرها لك
+                  </h2>
+                  <div className="space-y-6">
+                    <div className="flex items-start">
+                      <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                        <span className="text-blue-600 font-bold">👍</span>
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-bold text-gray-900">Facebook & Instagram</h3>
+                        <p className="text-gray-600">إعلانات الخلاصة، القصص، الريلز، والمجموعات للوصول الأمثل</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start">
+                      <div className="w-12 h-12 bg-black rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                        <span className="text-white font-bold">🎵</span>
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-bold text-gray-900">TikTok</h3>
+                        <p className="text-gray-600">إعلانات فيديو إبداعية تناسب الجيل الجديد من المتسوقين</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start">
+                      <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                        <span className="text-blue-600 font-bold">💼</span>
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-bold text-gray-900">LinkedIn</h3>
+                        <p className="text-gray-600">إعلانات B2B احترافية لاستهداف أصحاب الأعمال والمديرين</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start">
+                      <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                        <span className="text-yellow-600 font-bold">👻</span>
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-bold text-gray-900">Snapchat</h3>
+                        <p className="text-gray-600">إعلانات تفاعلية مع AR والفلاتر لتجربة فريدة</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start">
+                      <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                        <span className="text-blue-600 font-bold">🐦</span>
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-bold text-gray-900">Twitter/X</h3>
+                        <p className="text-gray-600">إعلانات نصية وبصرية للأحداث والترويج السريع</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="bg-gradient-to-br from-pink-50 to-purple-50 rounded-3xl p-8">
+                  <h3 className="text-2xl font-black text-gray-900 mb-6 text-center">
+                    أنواع الإعلانات المتاحة
+                  </h3>
+                  <div className="grid md:grid-cols-2 gap-4">
+                    {[
+                      { icon: '🖼️', title: 'إعلانات الصور', desc: 'صور جذابة وتصاميم احترافية' },
+                      { icon: '🎬', title: 'إعلانات الفيديو', desc: 'فيديوهات قصيرة وجذابة' },
+                      { icon: '📱', title: 'إعلانات القصص', desc: 'Stories بتصميم تفاعلي' },
+                      { icon: '🎪', title: 'إعلانات الكاروسيل', desc: 'عدة صور في إعلان واحد' },
+                      { icon: '🛍️', title: 'إعلانات التسوق', desc: 'عرض المنتجات بالأسعار' },
+                      { icon: '🎭', title: 'إعلانات تفاعلية', desc: 'فلاتر و AR متقدمة' }
+                    ].map((item, index) => (
+                      <div key={index} className="bg-white rounded-xl p-4 shadow-md hover:shadow-lg transition-all">
+                        <div className="text-2xl mb-2">{item.icon}</div>
+                        <h4 className="font-bold text-gray-900 mb-1">{item.title}</h4>
+                        <p className="text-sm text-gray-600">{item.desc}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </Container>
+          </section>
+
+          <section className="py-20 bg-gray-900 text-white">
+            <Container>
+              <div className="text-center mb-16">
+                <h2 className="text-4xl font-black mb-6">
+                  نتائج استثنائية حققناها
+                </h2>
+                <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+                  هذه بعض النتائج الحقيقية التي حققناها لعملائنا في حملات وسائل التواصل
+                </p>
+              </div>
+              
+              <div className="grid md:grid-cols-4 gap-8">
+                <div className="bg-gray-800 rounded-3xl p-8 text-center">
+                  <div className="text-4xl font-black text-pink-500 mb-2">+1000%</div>
+                  <h3 className="text-xl font-bold mb-2">زيادة التفاعل</h3>
+                  <p className="text-gray-400">مطعم في الرياض</p>
+                </div>
+                
+                <div className="bg-gray-800 rounded-3xl p-8 text-center">
+                  <div className="text-4xl font-black text-blue-500 mb-2">2.8M</div>
+                  <h3 className="text-xl font-bold mb-2">مشاهدات الفيديو</h3>
+                  <p className="text-gray-400">براند أزياء في دبي</p>
+                </div>
+                
+                <div className="bg-gray-800 rounded-3xl p-8 text-center">
+                  <div className="text-4xl font-black text-green-500 mb-2">450%</div>
+                  <h3 className="text-xl font-bold mb-2">زيادة المتابعين</h3>
+                  <p className="text-gray-400">صالة رياضية في الدوحة</p>
+                </div>
+                
+                <div className="bg-gray-800 rounded-3xl p-8 text-center">
+                  <div className="text-4xl font-black text-yellow-500 mb-2">85%</div>
+                  <h3 className="text-xl font-bold mb-2">معدل التحويل</h3>
+                  <p className="text-gray-400">متجر إلكتروني في الكويت</p>
+                </div>
+              </div>
+            </Container>
+          </section>
+
+          <section className="py-20 bg-gradient-to-r from-pink-500 to-purple-500 text-white">
+            <Container>
+              <div className="text-center">
+                <h2 className="text-4xl font-black mb-6">
+                  استراتيجية شاملة لنجاح إعلاناتك
+                </h2>
+                <p className="text-xl mb-8 max-w-3xl mx-auto leading-relaxed">
+                  لا نكتفي بإنشاء الإعلانات فقط، بل نبني استراتيجية متكاملة لضمان أفضل النتائج
+                </p>
+                <div className="bg-white rounded-2xl p-8 max-w-4xl mx-auto">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-6">خطة العمل المتكاملة</h3>
+                  <div className="grid md:grid-cols-2 gap-6 text-gray-700 text-right">
+                    {[
+                      '📊 تحليل العلامة التجارية والمنافسين',
+                      '🎯 تحديد الجمهور المستهدف بدقة',
+                      '🎨 إنشاء هوية بصرية متميزة',
+                      '📝 كتابة محتوى جذاب وفعال',
+                      '📸 تصوير وتصميم إعلانات احترافية',
+                      '🚀 إطلاق الحملات وتحسينها',
+                      '📈 تتبع النتائج والتحليل المستمر',
+                      '📋 تقارير شهرية مفصلة'
+                    ].map((item, index) => (
+                      <div key={index} className="flex items-center">
+                        <span className="text-green-600 mr-2">✓</span>
+                        <span className="text-sm">{item}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="mt-8 p-6 bg-gradient-to-r from-pink-100 to-purple-100 rounded-xl">
+                    <h4 className="font-bold text-gray-900 mb-2">🎁 مكافأة خاصة</h4>
+                    <p className="text-gray-700 text-sm">
+                      احصل على تصميم 10 بوستات إضافية مجاناً عند طلب الخدمة هذا الشهر!
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </Container>
+          </section>
+        </>
+      )}
+
+      {/* AI Solutions Rich Content */}
+      {service.id === 'ai-solutions' && (
+        <>
+          <section className="py-20 bg-gradient-to-br from-purple-50 to-indigo-50">
+            <Container>
+              <div className="text-center mb-16">
+                <h2 className="text-4xl font-black text-gray-900 mb-6">
+                  لماذا حلول الذكاء الاصطناعي ضرورية لعملك؟
+                </h2>
+                <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+                  في عصر التكنولوجيا، الذكاء الاصطناعي ليس مجرد اتجاه، بل ضرورة حتمية لتطوير أعمالك وزيادة كفاءتها
+                </p>
+              </div>
+              
+              <div className="grid lg:grid-cols-4 gap-8 mb-16">
+                <div className="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300">
+                  <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-violet-500 rounded-full flex items-center justify-center mb-6 mx-auto">
+                    <span className="text-2xl text-white">🤖</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">أتمتة العمليات</h3>
+                  <p className="text-gray-600 text-center">
+                    أتمتة المهام المتكررة وتوفير الوقت والجهد لفريق العمل
+                  </p>
+                </div>
+                
+                <div className="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300">
+                  <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center mb-6 mx-auto">
+                    <span className="text-2xl text-white">💬</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">خدمة عملاء 24/7</h3>
+                  <p className="text-gray-600 text-center">
+                    روبوتات محادثة ذكية تخدم عملائك على مدار الساعة
+                  </p>
+                </div>
+                
+                <div className="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300">
+                  <div className="w-16 h-16 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-full flex items-center justify-center mb-6 mx-auto">
+                    <span className="text-2xl text-white">📊</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">تحليل ذكي للبيانات</h3>
+                  <p className="text-gray-600 text-center">
+                    اكتشف الأنماط والاتجاهات من بياناتك لاتخاذ قرارات أفضل
+                  </p>
+                </div>
+                
+                <div className="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300">
+                  <div className="w-16 h-16 bg-gradient-to-r from-orange-500 to-red-500 rounded-full flex items-center justify-center mb-6 mx-auto">
+                    <span className="text-2xl text-white">💰</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">توفير التكاليف</h3>
+                  <p className="text-gray-600 text-center">
+                    تقليل تكاليف التشغيل وزيادة الإنتاجية بشكل كبير
+                  </p>
+                </div>
+              </div>
+            </Container>
+          </section>
+
+          <section className="py-20 bg-white">
+            <Container>
+              <div className="grid lg:grid-cols-2 gap-16 items-center">
+                <div>
+                  <h2 className="text-4xl font-black text-gray-900 mb-8">
+                    حلول الذكاء الاصطناعي التي نقدمها
+                  </h2>
+                  <div className="space-y-6">
+                    <div className="flex items-start">
+                      <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                        <span className="text-purple-600 font-bold">🤖</span>
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-bold text-gray-900">روبوتات المحادثة الذكية</h3>
+                        <p className="text-gray-600">ChatGPT، Claude، Gemini للرد على استفسارات العملاء تلقائياً</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start">
+                      <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                        <span className="text-blue-600 font-bold">⚙️</span>
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-bold text-gray-900">أتمتة العمليات التجارية</h3>
+                        <p className="text-gray-600">أتمتة سير العمل، إدارة المخزون، معالجة الطلبات</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start">
+                      <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                        <span className="text-green-600 font-bold">📈</span>
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-bold text-gray-900">تحليل البيانات المتقدم</h3>
+                        <p className="text-gray-600">Machine Learning لتحليل سلوك العملاء والتنبؤ بالاتجاهات</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start">
+                      <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                        <span className="text-yellow-600 font-bold">👁️</span>
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-bold text-gray-900">رؤية الحاسوب</h3>
+                        <p className="text-gray-600">تحليل الصور والفيديوهات تلقائياً لأغراض التسويق والأمان</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start">
+                      <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                        <span className="text-red-600 font-bold">🧠</span>
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-bold text-gray-900">معالجة اللغات الطبيعية</h3>
+                        <p className="text-gray-600">فهم وتحليل النصوص باللغة العربية والإنجليزية</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-3xl p-8">
+                  <h3 className="text-2xl font-black text-gray-900 mb-6 text-center">
+                    التقنيات المتقدمة
+                  </h3>
+                  <div className="grid md:grid-cols-2 gap-4">
+                    {[
+                      { icon: '🔥', title: 'ChatGPT Integration', desc: 'تكامل مع أحدث نماذج OpenAI' },
+                      { icon: '🌟', title: 'Custom AI Models', desc: 'نماذج ذكاء اصطناعي مخصصة' },
+                      { icon: '⚡', title: 'Real-time Processing', desc: 'معالجة فورية للبيانات' },
+                      { icon: '🔒', title: 'Secure & Private', desc: 'آمان وخصوصية عالية' },
+                      { icon: '🌍', title: 'Multi-language Support', desc: 'دعم العربية والإنجليزية' },
+                      { icon: '📱', title: 'Cross-platform', desc: 'يعمل على جميع المنصات' }
+                    ].map((item, index) => (
+                      <div key={index} className="bg-white rounded-xl p-4 shadow-md hover:shadow-lg transition-all">
+                        <div className="text-2xl mb-2">{item.icon}</div>
+                        <h4 className="font-bold text-gray-900 mb-1">{item.title}</h4>
+                        <p className="text-sm text-gray-600">{item.desc}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </Container>
+          </section>
+
+          <section className="py-20 bg-gray-900 text-white">
+            <Container>
+              <div className="text-center mb-16">
+                <h2 className="text-4xl font-black mb-6">
+                  نتائج مذهلة حققناها لعملائنا
+                </h2>
+                <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+                  هذه بعض النتائج الحقيقية لتطبيق حلول الذكاء الاصطناعي في مختلف القطاعات
+                </p>
+              </div>
+              
+              <div className="grid md:grid-cols-4 gap-8">
+                <div className="bg-gray-800 rounded-3xl p-8 text-center">
+                  <div className="text-4xl font-black text-purple-500 mb-2">80%</div>
+                  <h3 className="text-xl font-bold mb-2">توفير في الوقت</h3>
+                  <p className="text-gray-400">شركة عقارات في دبي</p>
+                </div>
+                
+                <div className="bg-gray-800 rounded-3xl p-8 text-center">
+                  <div className="text-4xl font-black text-blue-500 mb-2">300%</div>
+                  <h3 className="text-xl font-bold mb-2">زيادة الإنتاجية</h3>
+                  <p className="text-gray-400">مصنع في الرياض</p>
+                </div>
+                
+                <div className="bg-gray-800 rounded-3xl p-8 text-center">
+                  <div className="text-4xl font-black text-green-500 mb-2">24/7</div>
+                  <h3 className="text-xl font-bold mb-2">خدمة عملاء</h3>
+                  <p className="text-gray-400">متجر إلكتروني في الكويت</p>
+                </div>
+                
+                <div className="bg-gray-800 rounded-3xl p-8 text-center">
+                  <div className="text-4xl font-black text-yellow-500 mb-2">95%</div>
+                  <h3 className="text-xl font-bold mb-2">دقة التحليل</h3>
+                  <p className="text-gray-400">بنك في الدوحة</p>
+                </div>
+              </div>
+            </Container>
+          </section>
+
+          <section className="py-20 bg-gradient-to-r from-purple-500 to-indigo-500 text-white">
+            <Container>
+              <div className="text-center">
+                <h2 className="text-4xl font-black mb-6">
+                  عملية التطوير المتكاملة
+                </h2>
+                <p className="text-xl mb-8 max-w-3xl mx-auto leading-relaxed">
+                  نتبع منهجية احترافية لضمان تطوير حلول ذكاء اصطناعي تناسب احتياجاتك تماماً
+                </p>
+                <div className="bg-white rounded-2xl p-8 max-w-5xl mx-auto">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-6">مراحل التطوير</h3>
+                  <div className="grid md:grid-cols-3 gap-8 text-gray-700">
+                    <div className="text-center">
+                      <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span className="text-purple-600 text-2xl">🔍</span>
+                      </div>
+                      <h4 className="font-bold mb-2">1. تحليل المتطلبات</h4>
+                      <p className="text-sm">دراسة شاملة لاحتياجاتك وتحديد الحلول المناسبة</p>
+                    </div>
+                    
+                    <div className="text-center">
+                      <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span className="text-blue-600 text-2xl">⚙️</span>
+                      </div>
+                      <h4 className="font-bold mb-2">2. التطوير والتدريب</h4>
+                      <p className="text-sm">بناء وتدريب النماذج الذكية على بياناتك</p>
+                    </div>
+                    
+                    <div className="text-center">
+                      <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span className="text-green-600 text-2xl">🚀</span>
+                      </div>
+                      <h4 className="font-bold mb-2">3. النشر والمتابعة</h4>
+                      <p className="text-sm">تطبيق الحلول ومتابعة الأداء والتحسين المستمر</p>
+                    </div>
+                  </div>
+                  
+                  <div className="mt-8 p-6 bg-gradient-to-r from-purple-100 to-indigo-100 rounded-xl">
+                    <h4 className="font-bold text-gray-900 mb-2">🎁 عرض خاص</h4>
+                    <p className="text-gray-700 text-sm">
+                      احصل على استشارة مجانية وتقييم شامل لإمكانية تطبيق الذكاء الاصطناعي في عملك!
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </Container>
+          </section>
+        </>
+      )}
+
+      {/* Desktop Software Rich Content */}
+      {service.id === 'desktop-software' && (
+        <>
+          <section className="py-20 bg-gradient-to-br from-slate-50 to-gray-50">
+            <Container>
+              <div className="text-center mb-16">
+                <h2 className="text-4xl font-black text-gray-900 mb-6">
+                  لماذا برامج سطح المكتب ضرورية لعملك؟
+                </h2>
+                <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+                  برامج سطح المكتب المخصصة توفر حلولاً قوية وآمنة تناسب احتياجاتك الخاصة وتعمل بكفاءة عالية
+                </p>
+              </div>
+              
+              <div className="grid lg:grid-cols-4 gap-8 mb-16">
+                <div className="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300">
+                  <div className="w-16 h-16 bg-gradient-to-r from-slate-500 to-gray-500 rounded-full flex items-center justify-center mb-6 mx-auto">
+                    <span className="text-2xl text-white">⚡</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">أداء عالي</h3>
+                  <p className="text-gray-600 text-center">
+                    برامج سطح المكتب تعمل بسرعة فائقة وكفاءة عالية مقارنة بالتطبيقات الويب
+                  </p>
+                </div>
+                
+                <div className="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300">
+                  <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full flex items-center justify-center mb-6 mx-auto">
+                    <span className="text-2xl text-white">🔒</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">أمان محلي</h3>
+                  <p className="text-gray-600 text-center">
+                    حماية عالية للبيانات الحساسة مع التخزين المحلي والتشفير المتقدم
+                  </p>
+                </div>
+                
+                <div className="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300">
+                  <div className="w-16 h-16 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-full flex items-center justify-center mb-6 mx-auto">
+                    <span className="text-2xl text-white">🎯</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">حلول مخصصة</h3>
+                  <p className="text-gray-600 text-center">
+                    برمجة خاصة تناسب متطلباتك بدقة مع إمكانيات لا محدودة
+                  </p>
+                </div>
+                
+                <div className="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300">
+                  <div className="w-16 h-16 bg-gradient-to-r from-orange-500 to-red-500 rounded-full flex items-center justify-center mb-6 mx-auto">
+                    <span className="text-2xl text-white">📊</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">تكامل كامل</h3>
+                  <p className="text-gray-600 text-center">
+                    ربط سلس مع أنظمتك الحالية وقواعد البيانات والأجهزة
+                  </p>
+                </div>
+              </div>
+            </Container>
+          </section>
+
+          <section className="py-20 bg-white">
+            <Container>
+              <div className="grid lg:grid-cols-2 gap-16 items-center">
+                <div>
+                  <h2 className="text-4xl font-black text-gray-900 mb-8">
+                    أنواع البرامج التي نطورها
+                  </h2>
+                  <div className="space-y-6">
+                    <div className="flex items-start">
+                      <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                        <span className="text-blue-600 font-bold">💼</span>
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-bold text-gray-900">برامج إدارة الأعمال</h3>
+                        <p className="text-gray-600">ERP، CRM، إدارة المشاريع، والموارد البشرية</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start">
+                      <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                        <span className="text-green-600 font-bold">💰</span>
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-bold text-gray-900">برامج المحاسبة والمالية</h3>
+                        <p className="text-gray-600">إدارة الحسابات، الفواتير، والتقارير المالية</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start">
+                      <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                        <span className="text-purple-600 font-bold">📦</span>
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-bold text-gray-900">برامج إدارة المخازن</h3>
+                        <p className="text-gray-600">تتبع المخزون، الطلبات، والتوريد الذكي</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start">
+                      <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                        <span className="text-yellow-600 font-bold">🏥</span>
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-bold text-gray-900">برامج طبية وتعليمية</h3>
+                        <p className="text-gray-600">إدارة العيادات، المستشفيات، والمؤسسات التعليمية</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start">
+                      <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                        <span className="text-red-600 font-bold">🏭</span>
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-bold text-gray-900">برامج صناعية متخصصة</h3>
+                        <p className="text-gray-600">التحكم في الإنتاج، الجودة، والصيانة</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="bg-gradient-to-br from-slate-50 to-gray-50 rounded-3xl p-8">
+                  <h3 className="text-2xl font-black text-gray-900 mb-6 text-center">
+                    التقنيات التي نستخدمها
+                  </h3>
+                  <div className="grid md:grid-cols-2 gap-4">
+                    {[
+                      { icon: '🖥️', title: 'C# .NET', desc: 'برامج Windows احترافية' },
+                      { icon: '🐍', title: 'Python', desc: 'تطبيقات ذكية وتحليل البيانات' },
+                      { icon: '☕', title: 'Java', desc: 'تطبيقات متعددة المنصات' },
+                      { icon: '⚡', title: 'Electron', desc: 'تطبيقات حديثة بتقنيات الويب' },
+                      { icon: '🔧', title: 'Qt/C++', desc: 'تطبيقات عالية الأداء' },
+                      { icon: '🗄️', title: 'Database Integration', desc: 'ربط مع جميع قواعد البيانات' }
+                    ].map((item, index) => (
+                      <div key={index} className="bg-white rounded-xl p-4 shadow-md hover:shadow-lg transition-all">
+                        <div className="text-2xl mb-2">{item.icon}</div>
+                        <h4 className="font-bold text-gray-900 mb-1">{item.title}</h4>
+                        <p className="text-sm text-gray-600">{item.desc}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </Container>
+          </section>
+
+          <section className="py-20 bg-gray-900 text-white">
+            <Container>
+              <div className="text-center mb-16">
+                <h2 className="text-4xl font-black mb-6">
+                  نتائج ملموسة لعملائنا
+                </h2>
+                <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+                  برامجنا المخصصة ساعدت العديد من الشركات على تحقيق نتائج مذهلة
+                </p>
+              </div>
+              
+              <div className="grid md:grid-cols-4 gap-8">
+                <div className="bg-gray-800 rounded-3xl p-8 text-center">
+                  <div className="text-4xl font-black text-blue-500 mb-2">400%</div>
+                  <h3 className="text-xl font-bold mb-2">زيادة الكفاءة</h3>
+                  <p className="text-gray-400">مصنع في جدة</p>
+                </div>
+                
+                <div className="bg-gray-800 rounded-3xl p-8 text-center">
+                  <div className="text-4xl font-black text-green-500 mb-2">90%</div>
+                  <h3 className="text-xl font-bold mb-2">توفير الوقت</h3>
+                  <p className="text-gray-400">شركة لوجستية في دبي</p>
+                </div>
+                
+                <div className="bg-gray-800 rounded-3xl p-8 text-center">
+                  <div className="text-4xl font-black text-yellow-500 mb-2">100%</div>
+                  <h3 className="text-xl font-bold mb-2">دقة البيانات</h3>
+                  <p className="text-gray-400">مستشفى في الرياض</p>
+                </div>
+                
+                <div className="bg-gray-800 rounded-3xl p-8 text-center">
+                  <div className="text-4xl font-black text-purple-500 mb-2">50%</div>
+                  <h3 className="text-xl font-bold mb-2">تقليل التكاليف</h3>
+                  <p className="text-gray-400">شركة تجارية في الكويت</p>
+                </div>
+              </div>
+            </Container>
+          </section>
+
+          <section className="py-20 bg-gradient-to-r from-slate-500 to-gray-500 text-white">
+            <Container>
+              <div className="text-center">
+                <h2 className="text-4xl font-black mb-6">
+                  عملية التطوير الاحترافية
+                </h2>
+                <p className="text-xl mb-8 max-w-3xl mx-auto leading-relaxed">
+                  نتبع منهجية احترافية لضمان تطوير برامج عالية الجودة تلبي احتياجاتك بدقة
+                </p>
+                <div className="bg-white rounded-2xl p-8 max-w-5xl mx-auto">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-8">مراحل التطوير</h3>
+                  <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 text-gray-700">
+                    <div className="text-center">
+                      <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span className="text-blue-600 text-2xl">📋</span>
+                      </div>
+                      <h4 className="font-bold mb-2">1. تحليل المتطلبات</h4>
+                      <p className="text-sm">دراسة شاملة لاحتياجاتك وتحديد المواصفات</p>
+                    </div>
+                    
+                    <div className="text-center">
+                      <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span className="text-green-600 text-2xl">🎨</span>
+                      </div>
+                      <h4 className="font-bold mb-2">2. التصميم والتخطيط</h4>
+                      <p className="text-sm">تصميم واجهات المستخدم وهيكل البرنامج</p>
+                    </div>
+                    
+                    <div className="text-center">
+                      <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span className="text-purple-600 text-2xl">⚙️</span>
+                      </div>
+                      <h4 className="font-bold mb-2">3. البرمجة والتطوير</h4>
+                      <p className="text-sm">كتابة الكود وتطوير الميزات بأحدث التقنيات</p>
+                    </div>
+                    
+                    <div className="text-center">
+                      <div className="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span className="text-yellow-600 text-2xl">🚀</span>
+                      </div>
+                      <h4 className="font-bold mb-2">4. النشر والدعم</h4>
+                      <p className="text-sm">تسليم البرنامج مع التدريب والدعم المستمر</p>
+                    </div>
+                  </div>
+                  
+                  <div className="mt-8 p-6 bg-gradient-to-r from-slate-100 to-gray-100 rounded-xl">
+                    <h4 className="font-bold text-gray-900 mb-2">🎁 خدمات مجانية</h4>
+                    <p className="text-gray-700 text-sm">
+                      احصل على استشارة مجانية وتحليل شامل لمتطلباتك + سنة دعم فني مجاني!
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </Container>
+          </section>
+        </>
+      )}
+
+      {/* Web Design & Development Rich Content */}
+      {service.id === 'web-design' && (
+        <>
+          <section className="py-20 bg-gradient-to-br from-blue-50 to-cyan-50">
+            <Container>
+              <div className="text-center mb-16">
+                <h2 className="text-4xl font-black text-gray-900 mb-6">
+                  لماذا موقع الويب ضروري لعملك؟
+                </h2>
+                <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+                  في العصر الرقمي، موقع الويب هو واجهتك الأولى للعملاء وأقوى وسائل التسويق والمبيعات
+                </p>
+              </div>
+              
+              <div className="grid lg:grid-cols-4 gap-8 mb-16">
+                <div className="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300">
+                  <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center mb-6 mx-auto">
+                    <span className="text-2xl text-white">🌐</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">حضور رقمي قوي</h3>
+                  <p className="text-gray-600 text-center">
+                    موقع ويب احترافي يعزز هويتك التجارية ويبني الثقة مع العملاء
+                  </p>
+                </div>
+                
+                <div className="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300">
+                  <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center mb-6 mx-auto">
+                    <span className="text-2xl text-white">💰</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">زيادة المبيعات</h3>
+                  <p className="text-gray-600 text-center">
+                    تصميم محسّن للتحويل يحول زوار الموقع إلى عملاء حقيقيين
+                  </p>
+                </div>
+                
+                <div className="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300">
+                  <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-violet-500 rounded-full flex items-center justify-center mb-6 mx-auto">
+                    <span className="text-2xl text-white">📱</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">وصول على مدار الساعة</h3>
+                  <p className="text-gray-600 text-center">
+                    موقعك يعمل 24/7 كمندوب مبيعات لا يتعب ولا ينام
+                  </p>
+                </div>
+                
+                <div className="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300">
+                  <div className="w-16 h-16 bg-gradient-to-r from-orange-500 to-red-500 rounded-full flex items-center justify-center mb-6 mx-auto">
+                    <span className="text-2xl text-white">🎯</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">تسويق فعال</h3>
+                  <p className="text-gray-600 text-center">
+                    منصة قوية لتسويق خدماتك ومنتجاتك وجذب عملاء جدد
+                  </p>
+                </div>
+              </div>
+            </Container>
+          </section>
+
+          <section className="py-20 bg-white">
+            <Container>
+              <div className="grid lg:grid-cols-2 gap-16 items-center">
+                <div>
+                  <h2 className="text-4xl font-black text-gray-900 mb-8">
+                    أنواع المواقع التي نصممها
+                  </h2>
+                  <div className="space-y-6">
+                    <div className="flex items-start">
+                      <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                        <span className="text-blue-600 font-bold">🛒</span>
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-bold text-gray-900">متاجر إلكترونية</h3>
+                        <p className="text-gray-600">منصات بيع متكاملة مع أنظمة الدفع والشحن</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start">
+                      <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                        <span className="text-green-600 font-bold">🏢</span>
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-bold text-gray-900">مواقع الشركات</h3>
+                        <p className="text-gray-600">مواقع احترافية تعرض خدماتك ومنتجاتك بشكل مميز</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start">
+                      <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                        <span className="text-purple-600 font-bold">🎨</span>
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-bold text-gray-900">مواقع المحافظ</h3>
+                        <p className="text-gray-600">عرض أعمالك وإنجازاتك بشكل إبداعي وجذاب</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start">
+                      <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                        <span className="text-yellow-600 font-bold">🚀</span>
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-bold text-gray-900">صفحات الهبوط</h3>
+                        <p className="text-gray-600">صفحات محسّنة للتحويل لحملاتك الإعلانية</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start">
+                      <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                        <span className="text-red-600 font-bold">📝</span>
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-bold text-gray-900">المدونات والمواقع الإخبارية</h3>
+                        <p className="text-gray-600">منصات محتوى متقدمة مع إدارة سهلة</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-3xl p-8">
+                  <h3 className="text-2xl font-black text-gray-900 mb-6 text-center">
+                    التقنيات الحديثة
+                  </h3>
+                  <div className="grid md:grid-cols-2 gap-4">
+                    {[
+                      { icon: '⚡', title: 'React & Next.js', desc: 'مواقع سريعة وتفاعلية' },
+                      { icon: '🎨', title: 'Modern UI/UX', desc: 'تصميمات عصرية وجذابة' },
+                      { icon: '📱', title: 'Responsive Design', desc: 'متجاوب مع جميع الأجهزة' },
+                      { icon: '⚙️', title: 'WordPress & CMS', desc: 'إدارة محتوى سهلة' },
+                      { icon: '🛡️', title: 'Security & SSL', desc: 'أمان وحماية متقدمة' },
+                      { icon: '🚀', title: 'Performance', desc: 'سرعة تحميل فائقة' }
+                    ].map((item, index) => (
+                      <div key={index} className="bg-white rounded-xl p-4 shadow-md hover:shadow-lg transition-all">
+                        <div className="text-2xl mb-2">{item.icon}</div>
+                        <h4 className="font-bold text-gray-900 mb-1">{item.title}</h4>
+                        <p className="text-sm text-gray-600">{item.desc}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </Container>
+          </section>
+
+          <section className="py-20 bg-gray-900 text-white">
+            <Container>
+              <div className="text-center mb-16">
+                <h2 className="text-4xl font-black mb-6">
+                  نتائج مذهلة حققناها لعملائنا
+                </h2>
+                <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+                  مواقع الويب التي طورناها ساعدت العديد من الأعمال على تحقيق نمو استثنائي
+                </p>
+              </div>
+              
+              <div className="grid md:grid-cols-4 gap-8">
+                <div className="bg-gray-800 rounded-3xl p-8 text-center">
+                  <div className="text-4xl font-black text-blue-500 mb-2">500%</div>
+                  <h3 className="text-xl font-bold mb-2">زيادة المبيعات</h3>
+                  <p className="text-gray-400">متجر إلكتروني في الرياض</p>
+                </div>
+                
+                <div className="bg-gray-800 rounded-3xl p-8 text-center">
+                  <div className="text-4xl font-black text-green-500 mb-2">300%</div>
+                  <h3 className="text-xl font-bold mb-2">زيادة الزوار</h3>
+                  <p className="text-gray-400">موقع شركة في دبي</p>
+                </div>
+                
+                <div className="bg-gray-800 rounded-3xl p-8 text-center">
+                  <div className="text-4xl font-black text-yellow-500 mb-2">0.8s</div>
+                  <h3 className="text-xl font-bold mb-2">سرعة التحميل</h3>
+                  <p className="text-gray-400">موقع محفظة في الدوحة</p>
+                </div>
+                
+                <div className="bg-gray-800 rounded-3xl p-8 text-center">
+                  <div className="text-4xl font-black text-purple-500 mb-2">95%</div>
+                  <h3 className="text-xl font-bold mb-2">تقييم المستخدمين</h3>
+                  <p className="text-gray-400">متجر إلكتروني في الكويت</p>
+                </div>
+              </div>
+            </Container>
+          </section>
+
+          <section className="py-20 bg-gradient-to-r from-blue-500 to-cyan-500 text-white">
+            <Container>
+              <div className="text-center">
+                <h2 className="text-4xl font-black mb-6">
+                  عملية التطوير المتكاملة
+                </h2>
+                <p className="text-xl mb-8 max-w-3xl mx-auto leading-relaxed">
+                  نتبع منهجية احترافية لضمان تطوير مواقع ويب عالية الجودة تحقق أهدافك
+                </p>
+                <div className="bg-white rounded-2xl p-8 max-w-5xl mx-auto">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-8">مراحل التطوير</h3>
+                  <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 text-gray-700">
+                    <div className="text-center">
+                      <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span className="text-blue-600 text-2xl">🎯</span>
+                      </div>
+                      <h4 className="font-bold mb-2">1. التخطيط والتحليل</h4>
+                      <p className="text-sm">دراسة احتياجاتك وتحديد الأهداف والجمهور المستهدف</p>
+                    </div>
+                    
+                    <div className="text-center">
+                      <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span className="text-green-600 text-2xl">🎨</span>
+                      </div>
+                      <h4 className="font-bold mb-2">2. التصميم والنماذج</h4>
+                      <p className="text-sm">تصميم واجهات مستخدم حديثة ونماذج تفاعلية</p>
+                    </div>
+                    
+                    <div className="text-center">
+                      <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span className="text-purple-600 text-2xl">⚙️</span>
+                      </div>
+                      <h4 className="font-bold mb-2">3. التطوير والبرمجة</h4>
+                      <p className="text-sm">تطوير الموقع بأحدث التقنيات مع الاختبار المستمر</p>
+                    </div>
+                    
+                    <div className="text-center">
+                      <div className="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span className="text-yellow-600 text-2xl">🚀</span>
+                      </div>
+                      <h4 className="font-bold mb-2">4. النشر والمتابعة</h4>
+                      <p className="text-sm">نشر الموقع مع التدريب والدعم المستمر</p>
+                    </div>
+                  </div>
+                  
+                  <div className="mt-8 p-6 bg-gradient-to-r from-blue-100 to-cyan-100 rounded-xl">
+                    <h4 className="font-bold text-gray-900 mb-2">🎁 باقة متكاملة</h4>
+                    <p className="text-gray-700 text-sm">
+                      تصميم مخصص + تطوير احترافي + تحسين SEO + استضافة سنة مجانية + دعم فني شامل!
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </Container>
+          </section>
+        </>
+      )}
+
+      {/* Social Media Management Rich Content */}
+      {service.id === 'social-media-management' && (
+        <>
+          <section className="py-20 bg-gradient-to-br from-pink-50 to-purple-50">
+            <Container>
+              <div className="text-center mb-16">
+                <h2 className="text-4xl font-black text-gray-900 mb-6">
+                  لماذا إدارة وسائل التواصل ضرورية لعملك؟
+                </h2>
+                <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+                  في عصر الإنترنت، وجودك على وسائل التواصل الاجتماعي ليس مجرد خيار بل ضرورة حتمية للنجاح
+                </p>
+              </div>
+              
+              <div className="grid lg:grid-cols-4 gap-8 mb-16">
+                <div className="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300">
+                  <div className="w-16 h-16 bg-gradient-to-r from-pink-500 to-rose-500 rounded-full flex items-center justify-center mb-6 mx-auto">
+                    <span className="text-2xl text-white">📱</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">التواصل المباشر</h3>
+                  <p className="text-gray-600 text-center">
+                    تواصل مباشر ومستمر مع عملائك وبناء علاقات قوية ومدى الحياة
+                  </p>
+                </div>
+                
+                <div className="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300">
+                  <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-violet-500 rounded-full flex items-center justify-center mb-6 mx-auto">
+                    <span className="text-2xl text-white">🎯</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">بناء العلامة التجارية</h3>
+                  <p className="text-gray-600 text-center">
+                    تطوير هوية قوية لعلامتك التجارية وزيادة الوعي بها بين الجمهور
+                  </p>
+                </div>
+                
+                <div className="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300">
+                  <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center mb-6 mx-auto">
+                    <span className="text-2xl text-white">💰</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">زيادة المبيعات</h3>
+                  <p className="text-gray-600 text-center">
+                    تحويل متابعيك إلى عملاء حقيقيين وزيادة إيراداتك بشكل مستدام
+                  </p>
+                </div>
+                
+                <div className="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300">
+                  <div className="w-16 h-16 bg-gradient-to-r from-orange-500 to-red-500 rounded-full flex items-center justify-center mb-6 mx-auto">
+                    <span className="text-2xl text-white">📊</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">تحليل شامل</h3>
+                  <p className="text-gray-600 text-center">
+                    بيانات دقيقة عن جمهورك لاتخاذ قرارات تسويقية ذكية
+                  </p>
+                </div>
+              </div>
+            </Container>
+          </section>
+
+          <section className="py-20 bg-white">
+            <Container>
+              <div className="grid lg:grid-cols-2 gap-16 items-center">
+                <div>
+                  <h2 className="text-4xl font-black text-gray-900 mb-8">
+                    المنصات التي ندير حساباتها
+                  </h2>
+                  <div className="space-y-6">
+                    <div className="flex items-start">
+                      <div className="w-12 h-12 bg-gradient-to-r from-pink-100 to-rose-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                        <span className="text-pink-600 font-bold">📷</span>
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-bold text-gray-900">إنستجرام</h3>
+                        <p className="text-gray-600">محتوى بصري مذهل، قصص تفاعلية، ريلز إبداعية</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start">
+                      <div className="w-12 h-12 bg-gradient-to-r from-blue-100 to-indigo-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                        <span className="text-blue-600 font-bold">👥</span>
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-bold text-gray-900">فيسبوك</h3>
+                        <p className="text-gray-600">بناء مجتمع قوي، مشاركة شاملة، إدارة الجروبات</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start">
+                      <div className="w-12 h-12 bg-gradient-to-r from-sky-100 to-blue-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                        <span className="text-sky-600 font-bold">🐦</span>
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-bold text-gray-900">تويتر X</h3>
+                        <p className="text-gray-600">محادثات فورية، أخبار عاجلة، تفاعل سريع</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start">
+                      <div className="w-12 h-12 bg-gradient-to-r from-purple-100 to-pink-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                        <span className="text-purple-600 font-bold">🎵</span>
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-bold text-gray-900">تيك توك</h3>
+                        <p className="text-gray-600">فيديوهات فيروسية، محتوى ترفيهي، وصول واسع</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start">
+                      <div className="w-12 h-12 bg-gradient-to-r from-blue-100 to-cyan-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                        <span className="text-blue-600 font-bold">💼</span>
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-bold text-gray-900">لينكد إن</h3>
+                        <p className="text-gray-600">شبكة مهنية، B2B، بناء السمعة المهنية</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="bg-gradient-to-br from-pink-50 to-purple-50 rounded-3xl p-8">
+                  <h3 className="text-2xl font-black text-gray-900 mb-6 text-center">
+                    خدماتنا الشاملة
+                  </h3>
+                  <div className="grid md:grid-cols-2 gap-4">
+                    {[
+                      { icon: '✍️', title: 'كتابة المحتوى', desc: 'نصوص جذابة ومؤثرة' },
+                      { icon: '🎨', title: 'التصميم الجرافيكي', desc: 'صور ومرئيات احترافية' },
+                      { icon: '📅', title: 'جدولة المنشورات', desc: 'نشر منتظم ومخطط' },
+                      { icon: '💬', title: 'إدارة التعليقات', desc: 'رد سريع وعملي' },
+                      { icon: '📊', title: 'التحليل والتقارير', desc: 'بيانات مفصلة ودقيقة' },
+                      { icon: '🎯', title: 'استراتيجية المحتوى', desc: 'خطة شاملة ومدروسة' }
+                    ].map((item, index) => (
+                      <div key={index} className="bg-white rounded-xl p-4 shadow-md hover:shadow-lg transition-all">
+                        <div className="text-2xl mb-2">{item.icon}</div>
+                        <h4 className="font-bold text-gray-900 mb-1">{item.title}</h4>
+                        <p className="text-sm text-gray-600">{item.desc}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </Container>
+          </section>
+
+          <section className="py-20 bg-gray-900 text-white">
+            <Container>
+              <div className="text-center mb-16">
+                <h2 className="text-4xl font-black mb-6">
+                  نتائج استثنائية حققناها
+                </h2>
+                <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+                  إدارتنا لوسائل التواصل ساعدت العديد من العلامات التجارية على تحقيق نمو هائل
+                </p>
+              </div>
+              
+              <div className="grid md:grid-cols-4 gap-8">
+                <div className="bg-gray-800 rounded-3xl p-8 text-center">
+                  <div className="text-4xl font-black text-pink-500 mb-2">1000%</div>
+                  <h3 className="text-xl font-bold mb-2">نمو المتابعين</h3>
+                  <p className="text-gray-400">مطعم في الرياض</p>
+                </div>
+                
+                <div className="bg-gray-800 rounded-3xl p-8 text-center">
+                  <div className="text-4xl font-black text-purple-500 mb-2">85%</div>
+                  <h3 className="text-xl font-bold mb-2">زيادة التفاعل</h3>
+                  <p className="text-gray-400">علامة أزياء في دبي</p>
+                </div>
+                
+                <div className="bg-gray-800 rounded-3xl p-8 text-center">
+                  <div className="text-4xl font-black text-blue-500 mb-2">200%</div>
+                  <h3 className="text-xl font-bold mb-2">زيادة المبيعات</h3>
+                  <p className="text-gray-400">متجر إلكتروني في الدوحة</p>
+                </div>
+                
+                <div className="bg-gray-800 rounded-3xl p-8 text-center">
+                  <div className="text-4xl font-black text-orange-500 mb-2">50M+</div>
+                  <h3 className="text-xl font-bold mb-2">مشاهدات شهرية</h3>
+                  <p className="text-gray-400">شركة تقنية في الكويت</p>
+                </div>
+              </div>
+            </Container>
+          </section>
+
+          <section className="py-20 bg-gradient-to-r from-pink-500 to-purple-500 text-white">
+            <Container>
+              <div className="text-center">
+                <h2 className="text-4xl font-black mb-6">
+                  خطة العمل الشاملة
+                </h2>
+                <p className="text-xl mb-8 max-w-3xl mx-auto leading-relaxed">
+                  نتبع استراتيجية مدروسة ومنهجية احترافية لضمان نجاح حساباتك على وسائل التواصل
+                </p>
+                <div className="bg-white rounded-2xl p-8 max-w-5xl mx-auto">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-8">مراحل العمل</h3>
+                  <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 text-gray-700">
+                    <div className="text-center">
+                      <div className="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span className="text-pink-600 text-2xl">🎯</span>
+                      </div>
+                      <h4 className="font-bold mb-2">1. تحليل الهدف</h4>
+                      <p className="text-sm">دراسة علامتك التجارية وتحديد الأهداف والجمهور المستهدف</p>
+                    </div>
+                    
+                    <div className="text-center">
+                      <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span className="text-purple-600 text-2xl">📝</span>
+                      </div>
+                      <h4 className="font-bold mb-2">2. بناء الاستراتيجية</h4>
+                      <p className="text-sm">وضع خطة محتوى شاملة وجدولة زمنية محكمة</p>
+                    </div>
+                    
+                    <div className="text-center">
+                      <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span className="text-blue-600 text-2xl">🎨</span>
+                      </div>
+                      <h4 className="font-bold mb-2">3. إنتاج المحتوى</h4>
+                      <p className="text-sm">إنشاء محتوى عالي الجودة ومتنوع يناسب كل منصة</p>
+                    </div>
+                    
+                    <div className="text-center">
+                      <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span className="text-orange-600 text-2xl">📈</span>
+                      </div>
+                      <h4 className="font-bold mb-2">4. المتابعة والتحليل</h4>
+                      <p className="text-sm">رصد الأداء المستمر والتطوير بناءً على النتائج</p>
+                    </div>
+                  </div>
+                  
+                  <div className="mt-8 p-6 bg-gradient-to-r from-pink-100 to-purple-100 rounded-xl">
+                    <h4 className="font-bold text-gray-900 mb-2">🎁 عروض حصرية</h4>
+                    <p className="text-gray-700 text-sm">
+                      باقة شاملة: إدارة 3 منصات + تصميم جرافيك + تحليل شهري + استشارة مجانية!
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </Container>
+          </section>
+        </>
+      )}
+
+      {/* CTA Section */}
+      <section className="py-20 bg-primary-600">
+        <Container>
+          <div className="text-center text-white">
+            <h2 className="text-3xl font-black mb-4">
+              جاهز لبدء مشروعك؟
+            </h2>
+            <p className="text-xl mb-8 max-w-2xl mx-auto">
+              تواصل معنا الآن واحصل على استشارة مجانية لخدمة {service.title}
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a
+                href={whatsappContactUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center px-8 py-4 bg-green-600 text-white hover:bg-green-700 rounded-xl font-bold text-lg transition-all duration-300 shadow-xl"
+              >
+                تواصل عبر واتساب
+              </a>
+              
+              <a
+                href={whatsappQuoteUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center px-8 py-4 border-2 border-white text-white hover:bg-white hover:text-primary-600 rounded-xl font-bold text-lg transition-all duration-300"
+              >
+                احصل على عرض سعر
+              </a>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      <Footer />
+      <WhatsAppFloat />
+    </div>
+  )
+}

@@ -1,32 +1,37 @@
-import type { Metadata } from 'next'
-import { Inter, Poppins } from 'next/font/google'
+import type { Metadata, Viewport } from 'next'
 import './globals.css'
 
-const inter = Inter({ subsets: ['latin'] })
-const poppins = Poppins({ 
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
-  variable: '--font-poppins'
-})
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+}
 
 export const metadata: Metadata = {
-  title: 'Falcon Pro Digital - ROI-Driven Google Ads & Web Design for GCC',
-  description: 'Professional Google Ads management and conversion-focused web design services for businesses in Saudi Arabia, Kuwait, and Qatar. Maximize your ROI with our proven strategies.',
-  keywords: 'google ads agency riyadh, digital marketing kuwait, web design qatar, تصميم مواقع, إعلانات جوجل',
+  title: 'Falcon Pro Digital - أكبر شركة إعلانات وتكنولوجيا معلومات وذكاء اصطناعي دولية في الخليج',
+  description: 'شركة Falcon Pro Digital تقدم خدمات التسويق الرقمي والذكاء الاصطناعي في السعودية وقطر والكويت والإمارات. فرع من شركة Aptiro LLC الأمريكية.',
+  keywords: ['تسويق رقمي', 'ذكاء اصطناعي', 'إعلانات جوجل', 'تصميم مواقع', 'السعودية', 'قطر', 'الكويت', 'الإمارات'],
   authors: [{ name: 'Falcon Pro Digital' }],
+  creator: 'Aptiro LLC',
+  publisher: 'Falcon Pro Digital',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   openGraph: {
-    title: 'Falcon Pro Digital - ROI-Driven Google Ads & Web Design',
-    description: 'Professional digital marketing services for GCC businesses',
+    title: 'Falcon Pro Digital - أكبر شركة إعلانات وتكنولوجيا معلومات وذكاء اصطناعي دولية في الخليج',
+    description: 'خدمات التسويق الرقمي والذكاء الاصطناعي المتقدمة في منطقة الخليج',
     url: 'https://falconprodigital.com',
     siteName: 'Falcon Pro Digital',
-    locale: 'en_US',
+    locale: 'ar_SA',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Falcon Pro Digital - ROI-Driven Google Ads & Web Design',
-    description: 'Professional digital marketing services for GCC businesses',
+    title: 'Falcon Pro Digital - أكبر شركة إعلانات وتكنولوجيا معلومات وذكاء اصطناعي دولية في الخليج',
+    description: 'خدمات التسويق الرقمي والذكاء الاصطناعي المتقدمة في منطقة الخليج',
   },
+
   robots: {
     index: true,
     follow: true,
@@ -46,14 +51,19 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="ar" className={`${poppins.variable}`}>
+    <html lang="ar" dir="rtl">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link 
+          href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" 
+          rel="stylesheet" 
+        />
+        <meta name="geo.region" content="SA" />
+        <meta name="geo.placename" content="Gulf Region" />
+        <meta name="ICBM" content="24.7136,46.6753" />
       </head>
-      <body className={inter.className}>
+      <body className="font-arabic antialiased bg-white text-gray-900">
         {children}
       </body>
     </html>

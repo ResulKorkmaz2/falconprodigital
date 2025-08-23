@@ -1,0 +1,37 @@
+User-agent: *
+Allow: /
+
+# Allow all crawlers to access the site
+User-agent: *
+Disallow: 
+
+# Sitemap location
+Sitemap: https://falconprodigital.com/sitemap.xml
+
+# Specific rules for major search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+# Block access to admin areas (if any in future)
+User-agent: *
+Disallow: /admin/
+Disallow: /.env
+Disallow: /api/internal/
+
+# Allow social media crawlers
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+
