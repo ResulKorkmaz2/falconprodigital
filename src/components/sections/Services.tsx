@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState, useMemo } from 'react'
-import { SERVICES } from '@/lib/constants'
+import { SERVICES, COMPANY_INFO } from '@/lib/constants'
 import Container from '@/components/ui/Container'
 import ServiceCard from '@/components/ui/ServiceCard'
 
@@ -170,7 +170,7 @@ const Services = () => {
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href={`https://wa.me/46724003075?text=${encodeURIComponent('Hello, I would like to get help in Digital Marketing')}`}
+                href={`https://wa.me/${COMPANY_INFO.whatsappNumber.replace('+', '')}?text=${encodeURIComponent(COMPANY_INFO.autoMessage)}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group inline-flex items-center justify-center px-8 py-4 bg-green-600 text-white font-bold text-lg rounded-2xl hover:bg-green-700 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1"

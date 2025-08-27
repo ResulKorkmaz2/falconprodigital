@@ -40,7 +40,7 @@ About Us (من نحن)
 
 Contact (اتصل بنا)
 ├── WhatsApp integration ONLY
-├── Hidden phone number: +46 72 400 30 75
+├── Hidden phone number: +1 628 800 68 18
 └── Auto-message: "Hello, I would like to get help in Digital Marketing"
 
 Footer (الفوتر)
@@ -105,5 +105,6 @@ Footer (الفوتر)
 - [ ] Mobile responsive design
 - [ ] Fast loading performance
 - [ ] SEO optimized for Arabic content
+
 
 
