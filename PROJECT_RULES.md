@@ -40,7 +40,7 @@ About Us (من نحن)
 
 Contact (اتصل بنا)
 ├── WhatsApp integration ONLY
-├── Hidden phone number: +1 628 800 68 18
+├── Hidden phone number: +1 (505) 373-6924
 └── Auto-message: "Hello, I would like to get help in Digital Marketing"
 
 Footer (الفوتر)

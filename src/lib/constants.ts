@@ -7,8 +7,8 @@ export const COMPANY_INFO = {
   parentCompany: 'Aptiro LLC',
   parentCompanyLocation: 'الولايات المتحدة الأمريكية',
   founded: '2024',
-  whatsappNumber: '+16288006818',
-  whatsappDisplayNumber: '+1 628 800 68 18',
+  whatsappNumber: '+15053736924',
+  whatsappDisplayNumber: '+1 (505) 373-6924',
   autoMessage: 'Hello, I would like to get help in Digital Marketing',
 } as const;
 
