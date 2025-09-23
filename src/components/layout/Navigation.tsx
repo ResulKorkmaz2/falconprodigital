@@ -206,99 +206,158 @@ const Navigation = () => {
             </Button>
           </div>
 
-          {/* Enhanced Mobile Menu Button */}
+          {/* Modern Mobile Menu Button */}
           <button
             onClick={toggleMenu}
             className={cn(
-              "lg:hidden mobile-menu-button p-3 rounded-xl transition-all duration-300 shadow-md",
+              "lg:hidden relative w-12 h-12 rounded-2xl transition-all duration-300 flex items-center justify-center group overflow-hidden",
               isScrolled 
-                ? "text-gray-700 hover:text-primary-600 hover:bg-gray-100 bg-white" 
-                : "text-white hover:text-white hover:bg-white/20 bg-white/10 backdrop-blur-sm"
+                ? "bg-white shadow-xl hover:shadow-2xl border border-gray-100 hover:border-primary-200" 
+                : "bg-white/15 backdrop-blur-xl hover:bg-white/25 shadow-2xl border border-white/20"
             )}
             aria-label="Toggle menu"
           >
-            <svg
-              className={cn(
-                "w-6 h-6 transition-all duration-300",
-                isOpen && "rotate-90"
-              )}
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              {isOpen ? (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2.5}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              ) : (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2.5}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              )}
-            </svg>
+            {/* Animated Background */}
+            <div className={cn(
+              "absolute inset-0 bg-gradient-to-r transition-all duration-300",
+              isScrolled
+                ? "from-primary-50 to-accent-50 opacity-0 group-hover:opacity-100"
+                : "from-white/10 to-white/5 opacity-0 group-hover:opacity-100"
+            )} />
+            
+            {/* Hamburger Lines */}
+            <div className="relative w-6 h-6 flex flex-col justify-center items-center">
+              <span className={cn(
+                "block w-6 h-0.5 rounded-full transition-all duration-300 transform origin-center",
+                isOpen ? "rotate-45 translate-y-1.5" : "translate-y-0",
+                isScrolled ? "bg-gray-700 group-hover:bg-primary-600" : "bg-white"
+              )} />
+              <span className={cn(
+                "block w-6 h-0.5 rounded-full transition-all duration-300 my-1.5",
+                isOpen ? "opacity-0 scale-0" : "opacity-100 scale-100",
+                isScrolled ? "bg-gray-700 group-hover:bg-primary-600" : "bg-white"
+              )} />
+              <span className={cn(
+                "block w-6 h-0.5 rounded-full transition-all duration-300 transform origin-center",
+                isOpen ? "-rotate-45 -translate-y-1.5" : "translate-y-0",
+                isScrolled ? "bg-gray-700 group-hover:bg-primary-600" : "bg-white"
+              )} />
+            </div>
+            
+            {/* Pulse Effect */}
+            <div className={cn(
+              "absolute inset-0 rounded-2xl transition-all duration-300",
+              isOpen 
+                ? "ring-4 ring-primary-200 ring-opacity-75" 
+                : "ring-0"
+            )} />
           </button>
         </div>
 
-        {/* Enhanced Mobile Menu */}
+        {/* Modern Mobile Menu */}
         <div className={cn(
-          "lg:hidden mobile-menu overflow-hidden transition-all duration-500 ease-in-out",
-          isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+          "lg:hidden mobile-menu overflow-hidden transition-all duration-700 ease-out",
+          isOpen ? "max-h-screen opacity-100 translate-y-0" : "max-h-0 opacity-0 -translate-y-4"
         )}>
-          <div className="px-4 pt-4 pb-6 mt-4 space-y-3 bg-white/98 backdrop-blur-xl rounded-2xl shadow-2xl border border-gray-100 mx-4">
-            {/* Mobile Navigation Items */}
-            {NAVIGATION_MENU.map((item, index) => (
-              <button
-                key={item.id}
-                onClick={() => handleNavClick(item.href, item.id)}
-                className={cn(
-                  'w-full text-right px-6 py-4 text-lg font-semibold transition-all duration-300 rounded-xl relative group',
-                  activeSection === item.id
-                    ? 'text-white bg-primary-600 shadow-lg shadow-primary-600/30'
-                    : 'text-gray-700 hover:text-primary-600 hover:bg-primary-50 hover:shadow-md'
-                )}
-                style={{ 
-                  animationDelay: `${index * 50}ms`,
-                  transform: isOpen ? 'translateY(0)' : 'translateY(-20px)'
-                }}
-              >
-                <div className="flex items-center justify-between">
-                  <span>{item.name}</span>
-                  {activeSection === item.id && (
-                    <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                    </svg>
-                  )}
-                </div>
-                
-                {/* Hover effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-primary-500/10 to-accent-500/10 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </button>
-            ))}
+          <div className="px-6 pt-6 pb-8 mt-6 mx-4 bg-white/95 backdrop-blur-2xl rounded-3xl shadow-2xl border border-gray-100/50 relative overflow-hidden">
+            {/* Background Gradient */}
+            <div className="absolute inset-0 bg-gradient-to-br from-primary-50/50 via-white to-accent-50/30" />
             
-            {/* Mobile CTA Section */}
-            <div className="pt-6 border-t border-gray-200 space-y-3">
-              <Button
-                variant="primary"
-                size="lg"
-                className="w-full shadow-lg hover:shadow-xl"
-                onClick={() => handleNavClick('#contact', 'contact')}
-              >
-                <svg className="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
-                </svg>
-                تواصل عبر الواتساب
-              </Button>
+            {/* Mobile Navigation Items */}
+            <div className="relative z-10 space-y-2">
+              {NAVIGATION_MENU.map((item, index) => (
+                <button
+                  key={item.id}
+                  onClick={() => handleNavClick(item.href, item.id)}
+                  className={cn(
+                    'w-full text-right px-5 py-4 text-lg font-bold transition-all duration-300 rounded-2xl relative group overflow-hidden border',
+                    activeSection === item.id
+                      ? 'text-white bg-gradient-to-r from-primary-600 to-primary-700 shadow-xl shadow-primary-600/30 border-primary-500'
+                      : 'text-gray-700 hover:text-primary-600 bg-white hover:bg-gradient-to-r hover:from-primary-50 hover:to-accent-50 hover:shadow-lg border-gray-100 hover:border-primary-200'
+                  )}
+                  style={{ 
+                    animationDelay: `${index * 100}ms`,
+                    transform: isOpen ? 'translateX(0) scale(1)' : 'translateX(20px) scale(0.95)',
+                    transition: `all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) ${index * 50}ms`
+                  }}
+                >
+                  <div className="flex items-center justify-between relative z-10">
+                    <div className="flex items-center">
+                      <span className="text-lg">{item.name}</span>
+                      {activeSection === item.id && (
+                        <div className="w-2 h-2 bg-white rounded-full mr-3 animate-pulse" />
+                      )}
+                    </div>
+                    
+                    {/* Arrow Icon */}
+                    <svg 
+                      className={cn(
+                        "w-5 h-5 transition-all duration-300",
+                        activeSection === item.id ? "text-white rotate-0" : "text-primary-400 group-hover:text-primary-600 group-hover:translate-x-1"
+                      )} 
+                      fill="none" 
+                      stroke="currentColor" 
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                    </svg>
+                  </div>
+                  
+                  {/* Shimmer Effect */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                </button>
+              ))}
+            </div>
+            
+            {/* Enhanced Mobile CTA Section */}
+            <div className="relative z-10 pt-6 mt-6 border-t border-gradient-to-r from-primary-200 via-gray-200 to-accent-200">
+              <div className="space-y-4">
+                {/* Primary CTA */}
+                <Button
+                  variant="primary"
+                  size="lg"
+                  className="w-full bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
+                  onClick={() => handleNavClick('#contact', 'contact')}
+                >
+                  <svg className="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+                  </svg>
+                  <span className="font-bold">تواصل عبر الواتساب</span>
+                </Button>
+                
+                {/* Secondary CTA */}
+                <button
+                  onClick={() => handleNavClick('/pricing', 'pricing')}
+                  className="w-full px-5 py-3 text-center bg-gradient-to-r from-accent-50 to-primary-50 hover:from-accent-100 hover:to-primary-100 text-primary-700 hover:text-primary-800 font-bold rounded-2xl border-2 border-primary-200 hover:border-primary-300 transition-all duration-300 hover:shadow-lg"
+                >
+                  <div className="flex items-center justify-center">
+                    <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
+                    </svg>
+                    <span>عرض الأسعار</span>
+                  </div>
+                </button>
+              </div>
               
               {/* Company info in mobile */}
-              <div className="text-center py-2">
-                <p className="text-sm text-gray-500">
-                  أكبر شركة رقمية في الخليج
+              <div className="text-center pt-4 mt-4 border-t border-gray-100">
+                <div className="flex items-center justify-center mb-2">
+                  <div className="w-8 h-8 bg-gradient-to-r from-primary-600 to-accent-600 rounded-xl flex items-center justify-center mr-2">
+                    <img 
+                      src="/logo.png" 
+                      alt="Falcon Pro Digital" 
+                      className="w-5 h-5 object-contain"
+                    />
+                  </div>
+                  <p className="text-sm font-bold text-gray-700">
+                    {COMPANY_INFO.name}
+                  </p>
+                </div>
+                <p className="text-xs text-gray-500 leading-relaxed">
+                  أكبر شركة رقمية في الخليج العربي
+                </p>
+                <p className="text-xs text-primary-600 font-medium mt-1">
+                  فرع من Aptiro LLC
                 </p>
               </div>
             </div>
