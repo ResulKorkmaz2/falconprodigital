@@ -28,7 +28,6 @@ export const SERVICES = [
     titleEnglish: 'Google Maps Registration',
     description: 'تسجيل وتحسين بيانات شركتك على خرائط جوجل لزيادة الظهور المحلي',
     features: ['إنشاء وتحسين البروفايل', 'إدارة المراجعات', 'تحسين الصور والمعلومات'],
-    price: 99,
     popular: false,
     icon: '📍',
     image: '/images/seo.jpg',
@@ -45,7 +44,6 @@ export const SERVICES = [
       'إدارة الميزانية والعروض',
       'تقارير مفصلة وتحليلات'
     ],
-    price: 199,
     popular: true,
     icon: '💡',
     image: '/images/google-ads.jpg',
@@ -62,7 +60,6 @@ export const SERVICES = [
       'تتبع المبيعات والتحويلات',
       'إعلانات إعادة الاستهداف'
     ],
-    price: 499,
     popular: true,
     icon: '🛍️',
     image: '/images/content-marketing.jpg',
@@ -79,7 +76,6 @@ export const SERVICES = [
       'إعادة الاستهداف الذكي',
       'تقارير أداء تفصيلية'
     ],
-    price: 199,
     popular: false,
     icon: '📢',
     image: '/images/social-media.jpg',
@@ -96,7 +92,6 @@ export const SERVICES = [
       'تحليل الأداء والتقارير',
       'بناء استراتيجية المحتوى'
     ],
-    price: 99,
     popular: false,
     icon: '📈',
     image: '/images/content-marketing1.jpg',
@@ -113,7 +108,6 @@ export const SERVICES = [
       'محسن لمحركات البحث',
       'لوحة تحكم سهلة'
     ],
-    price: 199,
     popular: true,
     icon: '🎨',
     image: '/images/web-design.jpg',
@@ -130,7 +124,6 @@ export const SERVICES = [
       'تدريب شامل للمستخدمين',
       'تحديثات دورية مجانية'
     ],
-    price: 1299,
     popular: false,
     icon: '⚙️',
     image: '/images/ozel-code.png',
@@ -147,7 +140,6 @@ export const SERVICES = [
       'تكامل مع الأنظمة الحالية',
       'دعم متعدد اللغات'
     ],
-    price: 999,
     popular: true,
     icon: '🚀',
     image: '/images/email-marketing.jpg',
@@ -158,6 +150,7 @@ export const SERVICES = [
 export const NAVIGATION_MENU = [
   { name: 'الرئيسية', href: '#home', id: 'home' },
   { name: 'خدماتنا', href: '#services', id: 'services' },
+  { name: 'أسعارنا', href: '/pricing', id: 'pricing' },
   { name: 'من نحن', href: '#about', id: 'about' },
   { name: 'اتصل بنا', href: '#contact', id: 'contact' },
 ] as const;

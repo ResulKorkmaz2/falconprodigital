@@ -2,14 +2,12 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { formatPrice } from '@/lib/utils'
 
 interface ServiceCardProps {
   id: string
   title: string
   description: string
   features: readonly string[]
-  price: number
   popular?: boolean
   icon: string
   image?: string
@@ -21,7 +19,6 @@ const ServiceCard = ({
   title, 
   description, 
   features, 
-  price,
   popular = false,
   icon,
   image,
@@ -98,15 +95,6 @@ const ServiceCard = ({
           {title}
         </h3>
 
-        {/* Price */}
-        <div className="text-center">
-          <div className="text-3xl font-black text-blue-600 mb-1">
-            {formatPrice(price)}
-          </div>
-          <div className="text-sm font-semibold text-green-600">
-            دفعة واحدة
-          </div>
-        </div>
       </div>
 
       {/* Content Section */}

@@ -281,6 +281,26 @@ const Footer = () => {
                 <div className="hidden sm:block w-1 h-6 bg-white/20"></div>
                 
                 <Link
+                  href="/refund-policy"
+                  className="flex items-center gap-2 px-3 py-2 lg:px-4 bg-purple-600/20 hover:bg-purple-600/30 rounded-full transition-all duration-300 hover:scale-105 border border-purple-500/20 w-full sm:w-auto justify-center"
+                >
+                  <span className="text-purple-400 text-sm">💰</span>
+                  <span className="text-purple-400 font-medium text-xs lg:text-sm">سياسة الإرجاع</span>
+                </Link>
+                
+                <div className="hidden sm:block w-1 h-6 bg-white/20"></div>
+                
+                <Link
+                  href="/terms-of-service"
+                  className="flex items-center gap-2 px-3 py-2 lg:px-4 bg-indigo-600/20 hover:bg-indigo-600/30 rounded-full transition-all duration-300 hover:scale-105 border border-indigo-500/20 w-full sm:w-auto justify-center"
+                >
+                  <span className="text-indigo-400 text-sm">📋</span>
+                  <span className="text-indigo-400 font-medium text-xs lg:text-sm">شروط الخدمة</span>
+                </Link>
+                
+                <div className="hidden sm:block w-1 h-6 bg-white/20"></div>
+                
+                <Link
                   href="/cookie-policy"
                   className="flex items-center gap-2 px-3 py-2 lg:px-4 bg-orange-600/20 hover:bg-orange-600/30 rounded-full transition-all duration-300 hover:scale-105 border border-orange-500/20 w-full sm:w-auto justify-center"
                 >

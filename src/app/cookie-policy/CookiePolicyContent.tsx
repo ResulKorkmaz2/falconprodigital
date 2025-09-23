@@ -11,7 +11,7 @@ export default function CookiePolicyContent() {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-orange-600 to-red-800 text-white py-20 md:py-32 overflow-hidden">
+      <section className="relative bg-gradient-to-br from-orange-600 to-red-800 text-white py-20 md:py-32 overflow-hidden pt-24">
         <div className="absolute inset-0 bg-black/20"></div>
         <Container className="relative z-10 text-center">
           <div className="flex items-center justify-center mb-4 text-white/90">

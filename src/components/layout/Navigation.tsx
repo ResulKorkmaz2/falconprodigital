@@ -69,6 +69,9 @@ const Navigation = () => {
     if (pathname?.startsWith('/services/')) {
       // On service pages, set services as active
       setActiveSection('services')
+    } else if (pathname === '/pricing') {
+      // On pricing page, set pricing as active
+      setActiveSection('pricing')
     } else if (pathname === '/') {
       // On home page, set home as active by default
       setActiveSection('home')
@@ -93,6 +96,9 @@ const Navigation = () => {
         // We're already on home, just scroll to element
         scrollToElement(elementId)
       }
+    } else {
+      // For direct page navigation (like /pricing)
+      router.push(href)
     }
   }
 
