@@ -144,7 +144,7 @@ export const SERVICES = [
     icon: '🚀',
     image: '/images/email-marketing.jpg',
   },
-] as const;
+];
 
 // Navigation Menu
 export const NAVIGATION_MENU = [

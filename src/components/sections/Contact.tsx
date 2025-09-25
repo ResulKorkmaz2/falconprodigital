@@ -61,7 +61,7 @@ const Contact = () => {
     }
 
     const selectedCountry = countries.find(c => c.value === country)
-    const selectedService = SERVICES.find(s => s.id === service)
+    const selectedService = (SERVICES as any[]).find((s: any) => s.id === service)
     
     // GTM DataLayer Event
     (window as any).dataLayer = (window as any).dataLayer || [];
