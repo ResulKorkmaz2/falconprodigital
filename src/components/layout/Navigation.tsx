@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
-import { NAVIGATION_MENU, COMPANY_INFO } from '@/lib/constants'
+import { NAVIGATION_MENU, COMPANY_INFO, WHATSAPP_CONFIG } from '@/lib/constants'
 import { scrollToElement, cn } from '@/lib/utils'
 import Container from '@/components/ui/Container'
 import Button from '@/components/ui/Button'
