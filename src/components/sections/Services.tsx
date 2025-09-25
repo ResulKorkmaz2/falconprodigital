@@ -172,6 +172,14 @@ const Services = () => {
                 href={`https://wa.me/${COMPANY_INFO.whatsappNumber.replace('+', '')}?text=${encodeURIComponent(COMPANY_INFO.autoMessage)}`}
                 target="_blank"
                 rel="noopener noreferrer"
+                data-wa-id="056914"
+                onClick={() => {
+                  (window as any).dataLayer = (window as any).dataLayer || [];
+                  (window as any).dataLayer.push({
+                    event: 'whatsapp_click',
+                    click_id: '056914'
+                  });
+                }}
                 className="group inline-flex items-center justify-center px-8 py-4 bg-green-600 text-white font-bold text-lg rounded-2xl hover:bg-green-700 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1"
               >
                 <svg className="w-6 h-6 ml-2 group-hover:rotate-12 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">

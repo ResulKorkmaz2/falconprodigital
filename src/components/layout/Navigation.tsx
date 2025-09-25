@@ -103,19 +103,14 @@ const Navigation = () => {
   }
 
   const handleWhatsAppClick = () => {
-    // GTM DataLayer Event with click ID 056914
-    if (typeof window !== 'undefined' && (window as any).dataLayer) {
-      (window as any).dataLayer.push({
-        'event': 'whatsapp_click',
-        'event_category': 'Contact',
-        'event_action': 'Navigation WhatsApp Click',
-        'event_label': 'Navigation Contact',
-        'click_id': '056914',
-        'button_location': 'navigation',
-        'lead_value': 12
-      })
-    }
+    // GTM DataLayer Event
+    (window as any).dataLayer = (window as any).dataLayer || [];
+    (window as any).dataLayer.push({
+      event: 'whatsapp_click',
+      click_id: '056914'
+    });
     
+    // WhatsApp açılış işlemi
     window.open(WHATSAPP_CONFIG.link, '_blank')
     setIsOpen(false) // Close mobile menu if open
   }
