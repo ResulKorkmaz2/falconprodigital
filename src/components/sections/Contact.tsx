@@ -63,6 +63,23 @@ const Contact = () => {
     const selectedCountry = countries.find(c => c.value === country)
     const selectedService = SERVICES.find(s => s.id === service)
     
+    // GTM DataLayer Event with click ID 056914
+    if (typeof window !== 'undefined' && (window as any).dataLayer) {
+      (window as any).dataLayer.push({
+        'event': 'whatsapp_contact_form_submit',
+        'event_category': 'Contact',
+        'event_action': 'WhatsApp Form Submit',
+        'event_label': selectedService?.title,
+        'click_id': '056914',
+        'service_type': selectedService?.id,
+        'customer_country': selectedCountry?.label,
+        'form_completion': 'complete',
+        'button_location': 'contact_form',
+        'lead_source': 'contact_form',
+        'lead_value': 25
+      })
+    }
+    
     const whatsappMessage = `🔥 *طلب خدمة جديد من الموقع* 🔥
 
 👤 *البيانات الشخصية:*

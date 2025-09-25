@@ -23,6 +23,19 @@ const WhatsAppFloat = () => {
   }, [mounted])
 
   const handleClick = () => {
+    // GTM DataLayer Event with click ID 056914
+    if (typeof window !== 'undefined' && (window as any).dataLayer) {
+      (window as any).dataLayer.push({
+        'event': 'whatsapp_click',
+        'event_category': 'Contact',
+        'event_action': 'Floating WhatsApp Click',
+        'event_label': 'Quick Contact',
+        'click_id': '056914',
+        'button_location': 'floating',
+        'lead_value': 15
+      })
+    }
+    
     window.open(WHATSAPP_CONFIG.link, '_blank')
   }
 
