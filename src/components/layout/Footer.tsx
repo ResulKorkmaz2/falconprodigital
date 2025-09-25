@@ -98,6 +98,7 @@ const Footer = () => {
                     {/* Premium WhatsApp CTA */}
                     <button
                       onClick={handleWhatsAppClick}
+                      data-wa-id="056914"
                       className="group bg-green-600 hover:bg-green-700 text-white px-6 py-3 lg:px-8 lg:py-4 rounded-2xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl font-bold text-base lg:text-lg w-full sm:w-auto"
                     >
                       <div className="flex items-center justify-center">
@@ -325,6 +326,7 @@ const Footer = () => {
                 
                 <button
                   onClick={handleWhatsAppClick}
+                  data-wa-id="056914"
                   className="flex items-center gap-2 px-3 py-2 lg:px-4 bg-green-600 hover:bg-green-700 rounded-full transition-all duration-300 hover:scale-105 w-full sm:w-auto justify-center"
                 >
                   <div className="w-2 h-2 bg-white rounded-full"></div>

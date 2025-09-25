@@ -67,6 +67,7 @@ const WhatsAppFloat = () => {
         onClick={handleClick}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
+        data-wa-id="056914"
         className={`
           flex items-center justify-center w-14 h-14 bg-green-600 hover:bg-green-700 rounded-full
           shadow-xl hover:shadow-2xl transition-all duration-300 border-2 border-green-500

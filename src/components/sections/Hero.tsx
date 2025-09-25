@@ -174,6 +174,7 @@ const Hero = () => {
                 variant="secondary"
                 size="xl"
                 onClick={handleStartProject}
+                data-wa-id="056914"
                 className="group bg-accent-500 text-white hover:bg-accent-600 shadow-2xl 
                          hover:shadow-white/20 transform hover:scale-105 transition-all duration-300 font-bold"
               >
