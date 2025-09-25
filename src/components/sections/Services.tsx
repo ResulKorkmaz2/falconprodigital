@@ -130,6 +130,7 @@ const Services = () => {
                   title={service.title}
                   description={service.description}
                   features={service.features}
+                  price={service.price}
                   popular={service.popular}
                   icon={service.icon}
                   image={service.image}
