@@ -9,7 +9,7 @@ export const COMPANY_INFO = {
   founded: '2024',
   whatsappNumber: '+15053736924',
   whatsappDisplayNumber: '+1 (505) 373-6924',
-  autoMessage: 'Hello, I would like to get help in Digital Marketing',
+  autoMessage: 'مرحباً، أود الحصول على مساعدة في التسويق الرقمي وتطوير الأعمال',
 } as const;
 
 // Service Areas
@@ -201,7 +201,7 @@ export const CONTACT_CONTENT = {
   subtitle: 'نحن هنا لمساعدتك في تطوير أعمالك رقمياً',
   description: 'الطريقة الوحيدة للتواصل معنا هي عبر الواتساب للحصول على رد سريع وخدمة مخصصة',
   whatsappText: 'تواصل عبر الواتساب',
-  autoMessageNote: 'سيتم إرسال رسالة تلقائية باللغة الإنجليزية لبدء المحادثة',
+  autoMessageNote: 'سيتم إرسال رسالة تلقائية باللغة العربية لبدء المحادثة',
   serviceAreas: {
     title: 'نخدم في:',
     areas: SERVICE_AREAS,

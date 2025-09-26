@@ -30,6 +30,13 @@ const WhatsAppFloat = () => {
       click_id: '056914'
     });
     
+    // Debug için console log
+    console.log('🚀 WhatsApp Float Button - GTM Event Fired:', {
+      event: 'whatsapp_click',
+      click_id: '056914',
+      location: 'floating'
+    });
+    
     // WhatsApp açılış işlemi
     window.open(WHATSAPP_CONFIG.link, '_blank')
   }
