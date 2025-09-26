@@ -113,7 +113,7 @@ const Contact = () => {
           
           {/* WhatsApp Form */}
           <div className={`${isVisible ? 'animate-slide-up' : 'opacity-0'}`}>
-            <div className="bg-white rounded-3xl shadow-2xl p-8 border border-gray-100">
+            <div className="bg-white rounded-3xl shadow-2xl p-8 border border-gray-100" style={{ touchAction: 'manipulation' }}>
               <div className="text-center mb-8">
                 <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
                   <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -128,7 +128,7 @@ const Contact = () => {
                 </p>
               </div>
 
-              <form onSubmit={handleWhatsAppSubmit} className="space-y-6">
+              <form onSubmit={handleWhatsAppSubmit} className="space-y-6" style={{ touchAction: 'manipulation' }}>
                 {/* Name Fields */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
@@ -140,7 +140,6 @@ const Contact = () => {
                       name="firstName"
                       value={formData.firstName}
                       onChange={handleInputChange}
-                      onClick={(e) => e.stopPropagation()}
                       className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-300 text-right"
                       placeholder="أدخل اسمك الأول"
                       required
@@ -155,7 +154,6 @@ const Contact = () => {
                       name="lastName"
                       value={formData.lastName}
                       onChange={handleInputChange}
-                      onClick={(e) => e.stopPropagation()}
                       className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-300 text-right"
                       placeholder="أدخل اسم العائلة"
                       required
@@ -174,7 +172,6 @@ const Contact = () => {
                       name="email"
                       value={formData.email}
                       onChange={handleInputChange}
-                      onClick={(e) => e.stopPropagation()}
                       className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-300 text-right"
                       placeholder="example@email.com"
                       required
@@ -218,7 +215,6 @@ const Contact = () => {
                       name="service"
                       value={formData.service}
                       onChange={handleInputChange}
-                      onClick={(e) => e.stopPropagation()}
                       className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-300 text-right"
                       required
                     >
@@ -238,7 +234,6 @@ const Contact = () => {
                       name="country"
                       value={formData.country}
                       onChange={handleInputChange}
-                      onClick={(e) => e.stopPropagation()}
                       className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-300 text-right"
                       required
                     >
