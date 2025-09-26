@@ -140,6 +140,7 @@ const Contact = () => {
                       name="firstName"
                       value={formData.firstName}
                       onChange={handleInputChange}
+                      onClick={(e) => e.stopPropagation()}
                       className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-300 text-right"
                       placeholder="أدخل اسمك الأول"
                       required
@@ -154,6 +155,7 @@ const Contact = () => {
                       name="lastName"
                       value={formData.lastName}
                       onChange={handleInputChange}
+                      onClick={(e) => e.stopPropagation()}
                       className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-300 text-right"
                       placeholder="أدخل اسم العائلة"
                       required
@@ -172,6 +174,7 @@ const Contact = () => {
                       name="email"
                       value={formData.email}
                       onChange={handleInputChange}
+                      onClick={(e) => e.stopPropagation()}
                       className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-300 text-right"
                       placeholder="example@email.com"
                       required
@@ -215,6 +218,7 @@ const Contact = () => {
                       name="service"
                       value={formData.service}
                       onChange={handleInputChange}
+                      onClick={(e) => e.stopPropagation()}
                       className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-300 text-right"
                       required
                     >
@@ -234,6 +238,7 @@ const Contact = () => {
                       name="country"
                       value={formData.country}
                       onChange={handleInputChange}
+                      onClick={(e) => e.stopPropagation()}
                       className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-300 text-right"
                       required
                     >
@@ -256,6 +261,7 @@ const Contact = () => {
                     name="message"
                     value={formData.message}
                     onChange={handleInputChange}
+                    onClick={(e) => e.stopPropagation()}
                     rows={4}
                     className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-300 text-right resize-none"
                     placeholder="أخبرنا المزيد عن مشروعك أو متطلباتك الخاصة..."
