@@ -186,6 +186,18 @@ const Contact = () => {
                       name="phone"
                       value={formData.phone}
                       onChange={handleInputChange}
+                      onKeyPress={(e) => {
+                        // Sadece rakamlar, +, -, boşluk ve () karakterlerine izin ver
+                        const allowedChars = /[0-9+\-\s()]/
+                        if (!allowedChars.test(e.key)) {
+                          e.preventDefault()
+                        }
+                      }}
+                      onInput={(e) => {
+                        // Input değerini temizle - sadece rakam, +, -, boşluk ve () bırak
+                        const target = e.target as HTMLInputElement
+                        target.value = target.value.replace(/[^0-9+\-\s()]/g, '')
+                      }}
                       className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-300 text-right"
                       placeholder="+966 5X XXX XXXX"
                       required
